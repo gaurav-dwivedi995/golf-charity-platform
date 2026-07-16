@@ -1,0 +1,42 @@
+.how-it-works{
+    padding: 80px 60px;
+    background: #f8f8f8;
+    text-align: center;
+}
+
+.how-it-works h2{
+    font-size: 40px;
+    color:#2b7a3d;
+    margin-bottom: 50px;
+}
+
+.steps{
+    display:flex;
+    justify-content: center;
+    gap:30px;
+    flex-wrap:wrap;
+}
+
+.step-card{
+    background:white;
+    width:300px;
+    padding:30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: 0.3s ease;
+}
+
+.step-card h3{
+    margin-bottom:15px;
+    color:#2b7a3d;
+}
+
+.step-card{
+    color:#555;
+    line-height:1.6;
+}
+
+.step-card:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0,0,0,.15);
+}
