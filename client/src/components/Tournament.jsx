@@ -1,28 +1,58 @@
 import "../styles/Tournament.css";
+import TournamentCard from "./TournamentCard";
 
 function Tournament() {
+
+  const tournaments = [
+    {
+      id: 1,
+      name: "Jaipur Charity Golf Championship 2026",
+      location: "Rambagh Golf Club, Jaipur",
+      date: "20 August 2026",
+      prizePool: 20000,
+      charityFund: 10000,
+      entryFee: 999,
+      participants: 120,
+    },
+
+    {
+      id: 2,
+      name: "Delhi Open Golf Tournament",
+      location: "Delhi Golf Club",
+      date: "5 September 2026",
+      prizePool: 80000,
+      charityFund: 15000,
+      entryFee: 1499,
+      participants: 95,
+    },
+
+    {
+      id: 3,
+      name: "Mumbai Elite Championship",
+      location: "Bombay Presidency Golf Club",
+      date: "18 September 2026",
+      prizePool: 120000,
+      charityFund: 25000,
+      entryFee: 1999,
+      participants: 150,
+    },
+  ];
+
   return (
     <section className="tournament">
 
-      <h2>Upcoming Tournament</h2>
+      <h2>Upcoming Tournaments</h2>
 
-      <div className="tournament-card">
+      <div className="tournament-container">
 
-        <h3>Jaipur Charity Golf Championship 2026</h3>
-
-        <p><strong>📍 Location:</strong> Rambagh Golf Club, Jaipur</p>
-
-        <p><strong>📅 Date:</strong> 20 August 2026</p>
-
-        <p><strong>🏆 Prize Pool:</strong> ₹50,000</p>
-
-        <p><strong>❤️ Charity Fund:</strong> ₹10,000</p>
-
-        <p><strong>💰 Entry Fee:</strong> ₹999</p>
-
-        <p><strong>👥 Participants:</strong> 120</p>
-
-        <button>Register Now</button>
+        {
+          tournaments.map((tournament) => (
+            <TournamentCard
+              key={tournament.id}
+              tournament={tournament}
+            />
+          ))
+        }
 
       </div>
 

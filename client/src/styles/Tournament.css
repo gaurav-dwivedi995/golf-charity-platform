@@ -18,17 +18,24 @@
     margin-bottom:50px;
 }
 
+/* Cards Container */
+
+.tournament-container{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+
+    gap:30px;
+}
+
 /* Card */
 
 .tournament-card{
 
-    max-width:700px;
-
-    margin:auto;
-
     background:#f8f8f8;
 
-    padding:40px;
+    padding:30px;
 
     border-radius:12px;
 
@@ -50,14 +57,14 @@
 
     color:#2b7a3d;
 
-    margin-bottom:25px;
+    margin-bottom:20px;
 }
 
 .tournament-card p{
 
     margin-bottom:15px;
 
-    font-size:18px;
+    font-size:17px;
 
     color:#444;
 }
@@ -68,7 +75,9 @@
 
     margin-top:20px;
 
-    padding:12px 30px;
+    width:100%;
+
+    padding:12px;
 
     border:none;
 
