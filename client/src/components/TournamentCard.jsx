@@ -1,7 +1,12 @@
-function TournamentCard({ tournament }) {
+function TournamentCard({
+  tournament,
+  handleRegister,
+  registeredTournament,
+}) {
+  const isRegistered = registeredTournament === tournament.name;
+
   return (
     <div className="tournament-card">
-
       <h3>{tournament.name}</h3>
 
       <p>
@@ -28,8 +33,12 @@ function TournamentCard({ tournament }) {
         <strong>👥 Participants:</strong> {tournament.participants}
       </p>
 
-      <button>Register Now</button>
-
+      <button
+        onClick={() => handleRegister(tournament.name)}
+        disabled={isRegistered}
+      >
+        {isRegistered ? "✅ Registered" : "Register Now"}
+      </button>
     </div>
   );
 }

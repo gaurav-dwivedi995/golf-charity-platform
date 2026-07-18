@@ -1,100 +1,71 @@
-.tournament{
-
-    padding:80px 60px;
-
-    background:#ffffff;
-
-    text-align:center;
+.tournament {
+  padding: 80px 60px;
+  background: #ffffff;
+  text-align: center;
 }
 
 /* Heading */
 
-.tournament h2{
-
-    font-size:40px;
-
-    color:#2b7a3d;
-
-    margin-bottom:50px;
+.tournament h2 {
+  font-size: 40px;
+  color: #2b7a3d;
+  margin-bottom: 50px;
 }
 
 /* Cards Container */
 
-.tournament-container{
-
-    display:grid;
-
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-
-    gap:30px;
+.tournament-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
 }
 
 /* Card */
 
-.tournament-card{
-
-    background:#f8f8f8;
-
-    padding:30px;
-
-    border-radius:12px;
-
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
-
-    transition:.3s;
+.tournament-card {
+  background: #f8f8f8;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
 }
 
-/* Hover */
-
-.tournament-card:hover{
-
-    transform:translateY(-8px);
-
-    box-shadow:0 12px 25px rgba(0,0,0,.15);
+.tournament-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
 }
 
-.tournament-card h3{
-
-    color:#2b7a3d;
-
-    margin-bottom:20px;
+.tournament-card h3 {
+  color: #2b7a3d;
+  margin-bottom: 20px;
 }
 
-.tournament-card p{
-
-    margin-bottom:15px;
-
-    font-size:17px;
-
-    color:#444;
+.tournament-card p {
+  margin-bottom: 15px;
+  font-size: 17px;
+  color: #444;
 }
 
 /* Button */
 
-.tournament-card button{
-
-    margin-top:20px;
-
-    width:100%;
-
-    padding:12px;
-
-    border:none;
-
-    border-radius:8px;
-
-    background:#2b7a3d;
-
-    color:white;
-
-    font-size:16px;
-
-    cursor:pointer;
-
-    transition:.3s;
+.tournament-card button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #2b7a3d;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.tournament-card button:hover{
+.tournament-card button:hover:not(:disabled) {
+  background: #1f5d2e;
+}
 
-    background:#1f5d2e;
+.tournament-card button:disabled {
+  background: #888;
+  cursor: not-allowed;
 }

@@ -1,5 +1,30 @@
+import "../styles/Charity.css";
+import CharityCard from "../components/CharityCard";
+
 function Charity() {
-  return <h1>Charity Page</h1>;
+
+  const charities = [
+    ...
+  ];
+
+  return (
+    <section className="charity">
+
+      <h2>Support a Charity</h2>
+
+      <div className="charity-container">
+
+        {charities.map((charity) => (
+          <CharityCard
+            key={charity.id}
+            charity={charity}
+          />
+        ))}
+
+      </div>
+
+    </section>
+  );
 }
 
 export default Charity;

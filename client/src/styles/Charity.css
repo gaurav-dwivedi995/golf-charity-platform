@@ -1,0 +1,68 @@
+.charity{
+    padding: 80px 60px;
+    background:#ffffff;
+    text-align:center;
+}
+
+.charity h2{
+    font-size: 40px;
+    color : #2b7a3d;
+    margin-bottom:50px;
+}
+
+.charity-container{
+    display:grid;
+    grid-template-columns: repeate(auto-fit, minmax(320px, 1fr));
+    gap:30px;
+}
+
+charity-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 12px 25px rgba(0,0,0,.15);
+}
+
+.charity-card h3{
+    color:#2b7a3d;
+    margin-bottom:20px;
+}
+
+.charity-card p{
+    margin-bottom:15px;
+    color:#444;
+    font-size:17px;
+}
+
+/* Progress Bar */
+
+.progress-bar{
+    width:100%;
+    height:12px;
+    background:#ddd;
+    border-radius:20px;
+    overflow:hidden;
+    margin:20px 0;
+}
+
+.progress-fill{
+    height:100%;
+    background:#2b7a3d;
+    transition:width .5s ease;
+}
+
+/* Button */
+
+.charity-card button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#2b7a3d;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.charity-card button:hover{
+    background:#1f5d2e;
+}

@@ -1,5 +1,11 @@
+import Scoreboard from "../components/Scoreboard";
+
 function Scores() {
-  return <h1>Scores Page</h1>;
+  return (
+    <>
+    <Scoreboard/>
+    </>
+  )
 }
 
 export default Scores;

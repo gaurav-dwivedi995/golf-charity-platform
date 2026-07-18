@@ -1,8 +1,8 @@
+import { useState } from "react";
 import "../styles/Tournament.css";
 import TournamentCard from "./TournamentCard";
 
 function Tournament() {
-
   const tournaments = [
     {
       id: 1,
@@ -14,7 +14,6 @@ function Tournament() {
       entryFee: 999,
       participants: 120,
     },
-
     {
       id: 2,
       name: "Delhi Open Golf Tournament",
@@ -25,7 +24,6 @@ function Tournament() {
       entryFee: 1499,
       participants: 95,
     },
-
     {
       id: 3,
       name: "Mumbai Elite Championship",
@@ -38,24 +36,27 @@ function Tournament() {
     },
   ];
 
+  const [registeredTournament, setRegisteredTournament] = useState("");
+
+  function handleRegister(name) {
+    setRegisteredTournament(name);
+    alert(`Successfully Registered for ${name}`);
+  }
+
   return (
     <section className="tournament">
-
       <h2>Upcoming Tournaments</h2>
 
       <div className="tournament-container">
-
-        {
-          tournaments.map((tournament) => (
-            <TournamentCard
-              key={tournament.id}
-              tournament={tournament}
-            />
-          ))
-        }
-
+        {tournaments.map((tournament) => (
+          <TournamentCard
+            key={tournament.id}
+            tournament={tournament}
+            handleRegister={handleRegister}
+            registeredTournament={registeredTournament}
+          />
+        ))}
       </div>
-
     </section>
   );
 }
