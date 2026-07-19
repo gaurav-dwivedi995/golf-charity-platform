@@ -1,0 +1,157 @@
+.admin-dashboard{
+    padding:80px 60px;
+    background:#f5f7fa;
+}
+
+/* ================= HEADER ================= */
+
+.admin-header{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.admin-header h1{
+    font-size:42px;
+    color:#2b7a3d;
+    margin-bottom:10px;
+}
+
+.admin-header p{
+    font-size:18px;
+    color:#555;
+}
+
+/* ================= STATS ================= */
+
+.admin-stats-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+    margin-bottom:50px;
+}
+
+.admin-stats-card{
+    background:#fff;
+    padding:30px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.admin-stats-card:hover{
+    transform:translateY(-6px);
+}
+
+.admin-icon{
+    font-size:45px;
+    margin-bottom:15px;
+}
+
+.admin-stats-card h3{
+    color:#666;
+    margin-bottom:12px;
+}
+
+.admin-stats-card h2{
+    color:#2b7a3d;
+    font-size:32px;
+}
+
+/* ================= TABLES ================= */
+
+.users-table,
+.tournament-manager,
+.donation-manager,
+.subscription-manager{
+    margin-top:50px;
+}
+
+.users-table h2,
+.tournament-manager h2,
+.donation-manager h2,
+.subscription-manager h2{
+    color:#2b7a3d;
+    margin-bottom:20px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+th{
+    background:#2b7a3d;
+    color:#fff;
+    padding:15px;
+}
+
+td{
+    padding:15px;
+    border-bottom:1px solid #eee;
+    text-align:center;
+}
+
+tr:hover{
+    background:#f7f7f7;
+}
+
+/* ================= ACTIONS ================= */
+
+.admin-actions{
+    margin-top:60px;
+}
+
+.admin-actions h2{
+    color:#2b7a3d;
+    margin-bottom:20px;
+}
+
+.admin-action-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+.admin-action-buttons button{
+    flex:1;
+    min-width:220px;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    background:#2b7a3d;
+    color:#fff;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.admin-action-buttons button:hover{
+    background:#1f5d2e;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+.admin-dashboard{
+    padding:40px 20px;
+}
+
+.admin-header h1{
+    font-size:32px;
+}
+
+.admin-action-buttons{
+    flex-direction:column;
+}
+
+table{
+    font-size:14px;
+}
+
+}

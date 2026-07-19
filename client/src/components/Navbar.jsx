@@ -1,22 +1,35 @@
-import {Link} from 'react-router-dom';
-import "./../styles/Navbar.css";
-function Navbar(){
-    return(
-        <nav className="navbar">
-            <h2 className="logo">Golf Charity</h2>
+import { NavLink } from "react-router-dom";
+import "../styles/Navbar.css";
 
-            <div className="nav-links">
+function Navbar() {
+  return (
+    <nav className="navbar">
 
-            <Link to="/">Home</Link>
-            
-            <Link to="/scores">Scores</Link>
-            <Link to="/subscription">Subscription</Link>
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Signup</Link>
-            </div>
-            
-        </nav>
-    );
+      <h2 className="logo">Golf Charity</h2>
+
+      <div className="nav-links">
+
+        <NavLink to="/">Home</NavLink>
+
+        <NavLink to="/scores">Scores</NavLink>
+
+        <NavLink to="/subscription">Subscription</NavLink>
+
+        <NavLink to="/charity">Charity</NavLink>
+
+        <NavLink to="/dashboard">Dashboard</NavLink>
+
+        <NavLink to="/admin-dashboard">Admin</NavLink>
+
+        <NavLink to="/login">Login</NavLink>
+
+        <NavLink to="/signup">Signup</NavLink>
+
+
+      </div>
+
+    </nav>
+  );
 }
 
 export default Navbar;

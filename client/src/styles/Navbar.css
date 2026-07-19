@@ -28,3 +28,8 @@
 .nav-links a:hover{
     color:#2b7a3d;
 }
+
+.nav-links a.active{
+    color:#2b7a3d;
+    font-weight:bold;
+}
