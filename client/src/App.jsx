@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Charity from "./pages/Charity";
 import Dashboard from "./pages/Dashboard";
 import AdminDashboard from "./pages/AdminDashboard";
+import Profile from "./pages/Profile";
 
 function App() {
 
@@ -39,6 +40,7 @@ function App() {
 
       <Route path="/signup" element={<Signup />} />
 
+      <Route path="/profile" element={<Profile />} />
     </Routes>
   );
 }
