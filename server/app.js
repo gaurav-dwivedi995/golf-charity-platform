@@ -6,6 +6,8 @@ require("./config/db");
 
 const authRoutes = require("./routes/authRoutes");
 const subscriptionRoutes = require("./routes/subscriptionRoutes");
+const tournamentRoutes = require("./routes/tournamentRoutes");
+const registrationRoutes = require("./routes/registrationRoutes");
 
 const app = express();
 
@@ -16,6 +18,8 @@ app.use(express.json());
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/subscription", subscriptionRoutes);
+app.use("/api/tournament", tournamentRoutes);
+app.use("/api/registration", registrationRoutes);
 
 // Home Route
 app.get("/", (req, res) => {
