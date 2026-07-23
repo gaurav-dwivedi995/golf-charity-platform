@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const {
   createUser,
   findUserByEmail,
+  findUserById,
 } = require("../models/userModel");
 
 // ======================
@@ -39,7 +40,7 @@ const signup = async (req, res) => {
         email,
         hashedPassword,
         phone,
-        (err, result) => {
+        (err) => {
           if (err) {
             return res.status(500).json({
               message: "Signup Failed",
@@ -127,7 +128,33 @@ const login = (req, res) => {
 
 };
 
+// ======================
+// PROFILE
+// ======================
+const profile = (req, res) => {
+
+  findUserById(req.user.id, (err, result) => {
+
+    if (err) {
+      return res.status(500).json({
+        message: "Database Error",
+      });
+    }
+
+    if (result.length === 0) {
+      return res.status(404).json({
+        message: "User Not Found",
+      });
+    }
+
+    return res.status(200).json(result[0]);
+
+  });
+
+};
+
 module.exports = {
   signup,
   login,
+  profile,
 };
