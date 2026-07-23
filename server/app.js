@@ -5,20 +5,26 @@ require("dotenv").config();
 require("./config/db");
 
 const authRoutes = require("./routes/authRoutes");
+const subscriptionRoutes = require("./routes/subscriptionRoutes");
 
 const app = express();
 
+// Middleware
 app.use(cors());
 app.use(express.json());
 
+// Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/subscription", subscriptionRoutes);
 
+// Home Route
 app.get("/", (req, res) => {
   res.send("Golf Charity Backend Running 🚀");
 });
 
-app.listen(process.env.PORT || 5000, () => {
-  console.log(
-    `Server running on port ${process.env.PORT || 5000}`
-  );
+// Server Start
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
 });

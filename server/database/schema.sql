@@ -12,3 +12,24 @@ CREATE TABLE users (
     role ENUM('user','admin') DEFAULT 'user',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE subscriptions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
+    user_id INT NOT NULL,
+
+    plan_name ENUM('Monthly','Quarterly','Yearly') NOT NULL,
+
+    amount DECIMAL(10,2) NOT NULL,
+
+    status ENUM('Pending','Active','Expired') DEFAULT 'Pending',
+
+    start_date DATE,
+
+    end_date DATE,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
