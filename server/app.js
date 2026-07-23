@@ -8,6 +8,8 @@ const authRoutes = require("./routes/authRoutes");
 const subscriptionRoutes = require("./routes/subscriptionRoutes");
 const tournamentRoutes = require("./routes/tournamentRoutes");
 const registrationRoutes = require("./routes/registrationRoutes");
+const scoreRoutes = require("./routes/scoreRoutes");
+const donationRoutes = require("./routes/donationRoutes");
 
 const app = express();
 
@@ -20,6 +22,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/subscription", subscriptionRoutes);
 app.use("/api/tournament", tournamentRoutes);
 app.use("/api/registration", registrationRoutes);
+app.use("/api/score", scoreRoutes);
+app.use("/api/donation", donationRoutes);
 
 // Home Route
 app.get("/", (req, res) => {
