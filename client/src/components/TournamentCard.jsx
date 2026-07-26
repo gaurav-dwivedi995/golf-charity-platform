@@ -1,61 +1,79 @@
+import { useNavigate } from "react-router-dom";
+
 function TournamentCard({
-  tournament,
-  handleRegister,
-  registeredTournament,
+    tournament,
+    handleRegister,
+    registeredTournament,
 }) {
 
-  const isRegistered =
-    registeredTournament === tournament.title;
+    const navigate = useNavigate();
 
-  return (
+    const isRegistered =
+        registeredTournament === tournament.title;
 
-    <div className="tournament-card">
+    return (
 
-      <h3>{tournament.title}</h3>
+        <div className="tournament-card">
 
-      <p>
-        <strong>📍 Location:</strong> {tournament.location}
-      </p>
+            <h3>{tournament.title}</h3>
 
-      <p>
-        <strong>📅 Date:</strong>{" "}
-        {new Date(
-          tournament.tournament_date
-        ).toLocaleDateString()}
-      </p>
+            <p>
+                <strong>📍 Location:</strong> {tournament.location}
+            </p>
 
-      <p>
-        <strong>💰 Entry Fee:</strong> ₹
-        {tournament.entry_fee}
-      </p>
+            <p>
+                <strong>📅 Date:</strong>{" "}
+                {new Date(
+                    tournament.tournament_date
+                ).toLocaleDateString()}
+            </p>
 
-      <p>
-        <strong>👥 Max Players:</strong>{" "}
-        {tournament.max_players}
-      </p>
+            <p>
+                <strong>💰 Entry Fee:</strong> ₹
+                {tournament.entry_fee}
+            </p>
 
-      <p>
-        <strong>📝 Description:</strong>{" "}
-        {tournament.description}
-      </p>
+            <p>
+                <strong>👥 Max Players:</strong>{" "}
+                {tournament.max_players}
+            </p>
 
-      <button
-           onClick={() =>
-              handleRegister(
-                  tournament.id,
-                  tournament.title
-        )
-    }
-    disabled={isRegistered}
->
-        {isRegistered
-          ? "✅ Registered"
-          : "Register Now"}
-      </button>
+            <p>
+                <strong>📝 Description:</strong>{" "}
+                {tournament.description}
+            </p>
 
-    </div>
+            <button
+                onClick={() =>
+                    handleRegister(
+                        tournament.id,
+                        tournament.title
+                    )
+                }
+                disabled={isRegistered}
+            >
+                {
+                    isRegistered
+                        ? "✅ Registered"
+                        : "Register Now"
+                }
+            </button>
 
-  );
+            <br /><br />
+
+            <button
+                onClick={() =>
+                    navigate(
+                        `/leaderboard/${tournament.id}`
+                    )
+                }
+            >
+                🏆 View Leaderboard
+            </button>
+
+        </div>
+
+    );
 
 }
 

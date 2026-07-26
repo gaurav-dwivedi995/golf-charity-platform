@@ -1,35 +1,55 @@
 function UpcomingTournament({ tournament }) {
-  return (
-    <div className="upcoming-tournament">
 
-      <h2>Upcoming Tournament</h2>
+    if (!tournament) {
 
-      <div className="upcoming-card">
+        return (
+            <div className="upcoming-tournament">
+                <h2>Upcoming Tournament</h2>
+                <p>No Upcoming Tournament</p>
+            </div>
+        );
 
-        <h3>{tournament.name}</h3>
+    }
 
-        <p>
-          <strong>📍 Location:</strong> {tournament.location}
-        </p>
+    return (
 
-        <p>
-          <strong>📅 Date:</strong> {tournament.date}
-        </p>
+        <div className="upcoming-tournament">
 
-        <p>
-          <strong>💰 Entry Fee:</strong> ₹{tournament.entryFee}
-        </p>
+            <h2>Upcoming Tournament</h2>
 
-        <p>
-          <strong>👥 Participants:</strong> {tournament.participants}
-        </p>
+            <div className="upcoming-card">
 
-        <button>View Details</button>
+                <h3>{tournament.title}</h3>
 
-      </div>
+                <p>
+                    <strong>📍 Location:</strong> {tournament.location}
+                </p>
 
-    </div>
-  );
+                <p>
+                    <strong>📅 Date:</strong>{" "}
+                    {new Date(
+                        tournament.tournament_date
+                    ).toLocaleDateString()}
+                </p>
+
+                <p>
+                    <strong>💰 Entry Fee:</strong> ₹
+                    {tournament.entry_fee}
+                </p>
+
+                <p>
+                    <strong>👥 Max Players:</strong>{" "}
+                    {tournament.max_players}
+                </p>
+
+                <button>View Details</button>
+
+            </div>
+
+        </div>
+
+    );
+
 }
 
 export default UpcomingTournament;

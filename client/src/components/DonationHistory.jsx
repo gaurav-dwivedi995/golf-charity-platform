@@ -1,39 +1,87 @@
 function DonationHistory({ donations }) {
-  return (
-    <div className="donation-history">
 
-      <h2>Donation History</h2>
+    return (
 
-      <table>
+        <div className="donation-history">
 
-        <thead>
-          <tr>
-            <th>Charity</th>
-            <th>Date</th>
-            <th>Amount</th>
-          </tr>
-        </thead>
+            <h2>Donation History</h2>
 
-        <tbody>
+            <table>
 
-          {donations.map((donation) => (
-            <tr key={donation.id}>
+                <thead>
 
-              <td>{donation.charity}</td>
+                    <tr>
 
-              <td>{donation.date}</td>
+                        <th>Date</th>
 
-              <td>₹{donation.amount}</td>
+                        <th>Amount</th>
 
-            </tr>
-          ))}
+                    </tr>
 
-        </tbody>
+                </thead>
 
-      </table>
+                <tbody>
 
-    </div>
-  );
+                    {
+
+                        donations.length === 0 ?
+
+                            (
+
+                                <tr>
+
+                                    <td colSpan="2">
+
+                                        No Donations Yet
+
+                                    </td>
+
+                                </tr>
+
+                            )
+
+                            :
+
+                            (
+
+                                donations.map((donation, index) => (
+
+                                    <tr key={index}>
+
+                                        <td>
+
+                                            {
+
+                                                new Date(
+                                                    donation.donated_at
+                                                ).toLocaleDateString()
+
+                                            }
+
+                                        </td>
+
+                                        <td>
+
+                                            ₹{donation.amount}
+
+                                        </td>
+
+                                    </tr>
+
+                                ))
+
+                            )
+
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    );
+
 }
 
 export default DonationHistory;

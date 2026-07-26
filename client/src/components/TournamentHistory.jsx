@@ -1,42 +1,95 @@
 function TournamentHistory({ history }) {
-  return (
-    <div className="tournament-history">
 
-      <h2>Tournament History</h2>
+    return (
 
-      <table>
+        <div className="tournament-history">
 
-        <thead>
-          <tr>
-            <th>Tournament</th>
-            <th>Date</th>
-            <th>Rank</th>
-            <th>Prize</th>
-          </tr>
-        </thead>
+            <h2>Tournament History</h2>
 
-        <tbody>
+            <table>
 
-          {history.map((item) => (
-            <tr key={item.id}>
+                <thead>
 
-              <td>{item.name}</td>
+                    <tr>
 
-              <td>{item.date}</td>
+                        <th>Tournament</th>
 
-              <td>{item.rank}</td>
+                        <th>Location</th>
 
-              <td>₹{item.prize}</td>
+                        <th>Date</th>
 
-            </tr>
-          ))}
+                        <th>Status</th>
 
-        </tbody>
+                    </tr>
 
-      </table>
+                </thead>
 
-    </div>
-  );
+                <tbody>
+
+                    {
+
+                        history.length === 0 ?
+
+                            (
+
+                                <tr>
+
+                                    <td colSpan="4">
+
+                                        No Tournament History
+
+                                    </td>
+
+                                </tr>
+
+                            )
+
+                            :
+
+                            (
+
+                                history.map((item, index) => (
+
+                                    <tr key={index}>
+
+                                        <td>{item.title}</td>
+
+                                        <td>{item.location}</td>
+
+                                        <td>
+
+                                            {
+
+                                                new Date(
+                                                    item.tournament_date
+                                                ).toLocaleDateString()
+
+                                            }
+
+                                        </td>
+
+                                        <td>
+
+                                            {item.payment_status}
+
+                                        </td>
+
+                                    </tr>
+
+                                ))
+
+                            )
+
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    );
+
 }
 
 export default TournamentHistory;

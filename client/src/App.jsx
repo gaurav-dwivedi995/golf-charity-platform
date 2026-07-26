@@ -11,10 +11,12 @@ import Charity from "./pages/Charity";
 import Dashboard from "./pages/Dashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import Profile from "./pages/Profile";
+import Leaderboard from "./pages/Leaderboard";
 
 function App() {
 
   return (
+
     <Routes>
 
       <Route element={<MainLayout />}>
@@ -34,6 +36,11 @@ function App() {
           element={<AdminDashboard />}
         />
 
+        <Route
+          path="/leaderboard/:id"
+          element={<Leaderboard />}
+        />
+
       </Route>
 
       <Route path="/login" element={<Login />} />
@@ -41,8 +48,11 @@ function App() {
       <Route path="/signup" element={<Signup />} />
 
       <Route path="/profile" element={<Profile />} />
+
     </Routes>
+
   );
+
 }
 
 export default App;

@@ -18,7 +18,7 @@ function Dashboard() {
 
     const [loading, setLoading] = useState(true);
 
-    const [user, setUser] = useState(null);
+    const [dashboard, setDashboard] = useState(null);
 
     useEffect(() => {
 
@@ -32,7 +32,7 @@ function Dashboard() {
 
             const response = await getDashboard();
 
-            setUser(response.data);
+            setDashboard(response.data);
 
         } catch (error) {
 
@@ -49,18 +49,6 @@ function Dashboard() {
 
     }
 
-    const upcomingTournament = {
-        name: "Jaipur Charity Golf Championship 2026",
-        location: "Rambagh Golf Club, Jaipur",
-        date: "20 August 2026",
-        entryFee: 999,
-        participants: 120,
-    };
-
-    const tournamentHistory = [];
-
-    const donations = [];
-
     if (loading) {
 
         return <h2>Loading Dashboard...</h2>;
@@ -73,8 +61,8 @@ function Dashboard() {
 
             <DashboardHeader
                 user={{
-                    name: user.full_name,
-                    subscription: user.membership
+                    name: dashboard.user.full_name,
+                    subscription: dashboard.user.membership
                 }}
             />
 
@@ -82,40 +70,40 @@ function Dashboard() {
 
                 <StatsCard
                     title="Subscription"
-                    value={user.membership}
+                    value={dashboard.user.membership}
                     icon="💎"
                 />
 
                 <StatsCard
                     title="Registered Tournaments"
-                    value={user.tournaments}
+                    value={dashboard.user.tournaments}
                     icon="🏌️"
                 />
 
                 <StatsCard
                     title="Total Donations"
-                    value={`₹${user.donations}`}
+                    value={`₹${dashboard.user.donations}`}
                     icon="❤️"
                 />
 
                 <StatsCard
                     title="Membership"
-                    value={user.membership}
+                    value={dashboard.user.membership}
                     icon="⭐"
                 />
 
             </div>
 
             <UpcomingTournament
-                tournament={upcomingTournament}
+                tournament={dashboard.upcomingTournament}
             />
 
             <TournamentHistory
-                history={tournamentHistory}
+                history={dashboard.tournamentHistory}
             />
 
             <DonationHistory
-                donations={donations}
+                donations={dashboard.donations}
             />
 
             <QuickActions />
