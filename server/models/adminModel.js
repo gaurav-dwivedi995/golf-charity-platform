@@ -24,6 +24,25 @@ const getDashboardStats = (callback) => {
 
 };
 
+// Get All Users
+const getAllUsers = (callback) => {
+
+    const sql = `
+        SELECT
+            id,
+            full_name,
+            email,
+            membership,
+            role
+        FROM users
+        ORDER BY id DESC
+    `;
+
+    db.query(sql, callback);
+
+};
+
 module.exports = {
-    getDashboardStats
+    getDashboardStats,
+    getAllUsers
 };
