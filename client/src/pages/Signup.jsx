@@ -1,82 +1,101 @@
-import {useState} from "react";
+import { useState } from "react";
+import API from "../services/api";
 import "../styles/Signup.css";
 
 function Signup() {
- 
+
     const [name, setName] = useState("");
-    const[email, setEmail] = useState("");
-    const[phone, setPhone]= useState("");
-    const[password, setPassword] = useState("");
-    const[confirmPassword, setConfirmPassword] =useState("");
- 
-    function handleSubmit(e){
-      e.preventDefault();
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
 
-    if(name === ""){
-        alert("Name is required");
-        return;
+    async function handleSubmit(e) {
+
+        e.preventDefault();
+
+        if (name === "") {
+            alert("Name is required");
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match");
+            return;
+        }
+
+        try {
+
+            const response = await API.post("/auth/signup", {
+                full_name: name,
+                email,
+                phone,
+                password
+            });
+
+            alert(response.data.message);
+
+            setName("");
+            setEmail("");
+            setPhone("");
+            setPassword("");
+            setConfirmPassword("");
+
+        } catch (error) {
+
+            alert(
+                error.response?.data?.message ||
+                "Signup Failed"
+            );
+
+        }
+
     }
 
-    if(password !== confirmPassword){
-        alert("Passwords do not match");
-        return;
-    }
+    return (
 
-      console.log({
-        name,
-        email,
-        phone,
-        password,
-        confirmPassword
-      });
-      alert("Account Created Successfully");
-    }
-
-
-    return(
         <div className="signup-container">
 
-            <form className="signup-form" onSubmit={handleSubmit}>
-                
+            <form
+                className="signup-form"
+                onSubmit={handleSubmit}
+            >
+
                 <h2>Create Account</h2>
-                
-                <input 
-                type="text"
-                placeholder="Full Name"
-                value={name}
-                onChange={(e)=>setName(e.target.value)}
+
+                <input
+                    type="text"
+                    placeholder="Full Name"
+                    value={name}
+                    onChange={(e)=>setName(e.target.value)}
                 />
 
-                 
-                <input 
-                type="email"
-                placeholder="Email Address"
-                value={email}
-                onChange={(e)=>setEmail(e.target.value)}
+                <input
+                    type="email"
+                    placeholder="Email Address"
+                    value={email}
+                    onChange={(e)=>setEmail(e.target.value)}
                 />
 
-                 
-                <input 
-                type="tel"
-                placeholder="Phone Number"
-                value={phone}
-                onChange={(e)=>setPhone(e.target.value)}
+                <input
+                    type="tel"
+                    placeholder="Phone Number"
+                    value={phone}
+                    onChange={(e)=>setPhone(e.target.value)}
                 />
 
-                 
-                <input 
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e)=>setPassword(e.target.value)}
+                <input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e)=>setPassword(e.target.value)}
                 />
 
-                 
-                <input 
-                type="password"
-                placeholder="Confirm Password"
-                value={confirmPassword}
-                onChange={(e)=>setConfirmPassword(e.target.value)}
+                <input
+                    type="password"
+                    placeholder="Confirm Password"
+                    value={confirmPassword}
+                    onChange={(e)=>setConfirmPassword(e.target.value)}
                 />
 
                 <button type="submit">
@@ -85,9 +104,10 @@ function Signup() {
 
             </form>
 
-            </div>
-                );
-  
+        </div>
+
+    );
+
 }
 
 export default Signup;

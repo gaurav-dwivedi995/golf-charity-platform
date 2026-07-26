@@ -1,46 +1,85 @@
-import {useState} from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import API from "../services/api";
 import "../styles/Login.css";
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
-   function handleSubmit(e){
-    e.preventDefault();
+    const navigate = useNavigate();
 
-    console.log(email);
-    console.log(password);
-   }
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-   return(
-    <div className="login-container">
+    async function handleSubmit(e) {
 
-        <form className="login-form" onSubmit={handleSubmit}>
-            
-            <h2>Login</h2> 
-          <input 
-          type="email" 
-          placeholder="Enter Email"
-          value={email}
-          onChange={(e)=>setEmail(e.target.value)}
-          />
+        e.preventDefault();
 
+        try {
 
-          <input
-              type="password"
-              placeholder="Enter password"
-              value={password}
-              onChange={(e)=>setPassword(e.target.value)}
-              />
-            
-            <button type="submit">
-                Login
-            </button>
- 
-           </form>
-            </div>
+            const response = await API.post("/auth/login", {
+                email,
+                password
+            });
 
-   )
+            localStorage.setItem(
+                "token",
+                response.data.token
+            );
+
+            localStorage.setItem(
+                "user",
+                JSON.stringify(response.data.user)
+            );
+
+            alert("Login Successful");
+
+            navigate("/dashboard");
+
+        } catch (error) {
+
+            alert(
+                error.response?.data?.message ||
+                "Login Failed"
+            );
+
+        }
+
+    }
+
+    return (
+
+        <div className="login-container">
+
+            <form
+                className="login-form"
+                onSubmit={handleSubmit}
+            >
+
+                <h2>Login</h2>
+
+                <input
+                    type="email"
+                    placeholder="Enter Email"
+                    value={email}
+                    onChange={(e)=>setEmail(e.target.value)}
+                />
+
+                <input
+                    type="password"
+                    placeholder="Enter Password"
+                    value={password}
+                    onChange={(e)=>setPassword(e.target.value)}
+                />
+
+                <button type="submit">
+                    Login
+                </button>
+
+            </form>
+
+        </div>
+
+    );
 
 }
 

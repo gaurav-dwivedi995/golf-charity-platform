@@ -21,6 +21,28 @@ const registerTournament = (
 
 };
 
+// Check Already Registered
+const checkRegistration = (
+    user_id,
+    tournament_id,
+    callback
+) => {
+
+    const sql = `
+        SELECT *
+        FROM registrations
+        WHERE user_id = ?
+        AND tournament_id = ?
+    `;
+
+    db.query(
+        sql,
+        [user_id, tournament_id],
+        callback
+    );
+
+};
+
 // Get My Registrations
 const getMyRegistrations = (
     user_id,
@@ -61,6 +83,7 @@ const cancelRegistration = (
 
 module.exports = {
     registerTournament,
+    checkRegistration,
     getMyRegistrations,
     cancelRegistration
 };

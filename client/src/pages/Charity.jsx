@@ -1,50 +1,108 @@
+import { useEffect, useState } from "react";
+
+import { donate } from "../services/donationService";
+import { getAllCharities } from "../services/charityService";
+
 import "../styles/Charity.css";
 import CharityCard from "../components/CharityCard";
 
 function Charity() {
 
-  const charities = [
-    {
-      id: 1,
-      name: "Smile Foundation",
-      category: "Education",
-      raised: 250000,
-      goal: 500000,
-    },
-    {
-      id: 2,
-      name: "Helping Hands",
-      category: "Food & Health",
-      raised: 120000,
-      goal: 300000,
-    },
-    {
-      id: 3,
-      name: "Green Earth",
-      category: "Tree Plantation",
-      raised: 90000,
-      goal: 200000,
-    },
-  ];
+    const [charities, setCharities] = useState([]);
 
-  return (
-    <section className="charity">
+    useEffect(() => {
 
-      <h2>Support a Charity</h2>
+        fetchCharities();
 
-      <div className="charity-container">
+    }, []);
 
-        {charities.map((charity) => (
-          <CharityCard
-            key={charity.id}
-            charity={charity}
-          />
-        ))}
+    async function fetchCharities() {
 
-      </div>
+        try {
 
-    </section>
-  );
+            const response = await getAllCharities();
+
+            setCharities(response.data);
+
+        } catch (err) {
+
+            console.log(err);
+
+        }
+
+    }
+
+    async function handleDonate(charity) {
+
+        const amount = prompt("Enter Donation Amount");
+
+        if (!amount) return;
+
+        try {
+
+            await donate(
+
+                charity.id,
+
+                Number(amount)
+
+            );
+
+            alert(
+
+                `₹${amount} donated to ${charity.name}`
+
+            );
+
+            // Refresh latest data from database
+            fetchCharities();
+
+        } catch (err) {
+
+            alert(
+
+                err.response?.data?.message ||
+
+                "Donation Failed"
+
+            );
+
+        }
+
+    }
+
+    return (
+
+        <section className="charity">
+
+            <h2>Support a Charity</h2>
+
+            <div className="charity-container">
+
+                {
+
+                    charities.map((charity) => (
+
+                        <CharityCard
+
+                            key={charity.id}
+
+                            charity={charity}
+
+                            handleDonate={handleDonate}
+
+                        />
+
+                    ))
+
+                }
+
+            </div>
+
+        </section>
+
+    );
+
 }
 
 export default Charity;

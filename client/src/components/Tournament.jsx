@@ -1,64 +1,87 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import API from "../services/api";
 import "../styles/Tournament.css";
 import TournamentCard from "./TournamentCard";
-
+import { registerTournament } from "../services/registrationService";
 function Tournament() {
-  const tournaments = [
-    {
-      id: 1,
-      name: "Jaipur Charity Golf Championship 2026",
-      location: "Rambagh Golf Club, Jaipur",
-      date: "20 August 2026",
-      prizePool: 20000,
-      charityFund: 10000,
-      entryFee: 999,
-      participants: 120,
-    },
-    {
-      id: 2,
-      name: "Delhi Open Golf Tournament",
-      location: "Delhi Golf Club",
-      date: "5 September 2026",
-      prizePool: 80000,
-      charityFund: 15000,
-      entryFee: 1499,
-      participants: 95,
-    },
-    {
-      id: 3,
-      name: "Mumbai Elite Championship",
-      location: "Bombay Presidency Golf Club",
-      date: "18 September 2026",
-      prizePool: 120000,
-      charityFund: 25000,
-      entryFee: 1999,
-      participants: 150,
-    },
-  ];
 
-  const [registeredTournament, setRegisteredTournament] = useState("");
+    const [tournaments, setTournaments] = useState([]);
 
-  function handleRegister(name) {
-    setRegisteredTournament(name);
-    alert(`Successfully Registered for ${name}`);
-  }
+    const [registeredTournament, setRegisteredTournament] =
+        useState("");
 
-  return (
-    <section className="tournament">
-      <h2>Upcoming Tournaments</h2>
+    useEffect(() => {
 
-      <div className="tournament-container">
-        {tournaments.map((tournament) => (
-          <TournamentCard
-            key={tournament.id}
-            tournament={tournament}
-            handleRegister={handleRegister}
-            registeredTournament={registeredTournament}
-          />
-        ))}
-      </div>
-    </section>
-  );
+        fetchTournaments();
+
+    }, []);
+
+    async function fetchTournaments() {
+
+        try {
+
+            const response =
+                await API.get("/tournament/all");
+
+            setTournaments(response.data);
+
+        } catch (error) {
+
+            console.log(error);
+
+            alert("Failed to Load Tournaments");
+
+        }
+
+    }
+
+   async function handleRegister(id, title) {
+
+    try {
+
+        await registerTournament(id);
+
+        setRegisteredTournament(title);
+
+        alert(`Successfully Registered for ${title}`);
+
+    } catch (err) {
+
+        alert(
+            err.response?.data?.message ||
+            "Registration Failed"
+        );
+
+    }
+
+}
+
+    return (
+
+        <section className="tournament">
+
+            <h2>Upcoming Tournaments</h2>
+
+            <div className="tournament-container">
+
+                {tournaments.map((tournament) => (
+
+                    <TournamentCard
+                       key={tournament.id}
+                       tournament={tournament}
+                       handleRegister={(id, title) =>
+                       handleRegister(id, title)
+             }
+                 registeredTournament={registeredTournament}
+                 />
+                ))}
+
+            </div>
+
+        </section>
+
+    );
+
 }
 
 export default Tournament;

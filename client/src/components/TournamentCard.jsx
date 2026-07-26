@@ -3,44 +3,60 @@ function TournamentCard({
   handleRegister,
   registeredTournament,
 }) {
-  const isRegistered = registeredTournament === tournament.name;
+
+  const isRegistered =
+    registeredTournament === tournament.title;
 
   return (
+
     <div className="tournament-card">
-      <h3>{tournament.name}</h3>
+
+      <h3>{tournament.title}</h3>
 
       <p>
         <strong>📍 Location:</strong> {tournament.location}
       </p>
 
       <p>
-        <strong>📅 Date:</strong> {tournament.date}
+        <strong>📅 Date:</strong>{" "}
+        {new Date(
+          tournament.tournament_date
+        ).toLocaleDateString()}
       </p>
 
       <p>
-        <strong>🏆 Prize Pool:</strong> ₹{tournament.prizePool}
+        <strong>💰 Entry Fee:</strong> ₹
+        {tournament.entry_fee}
       </p>
 
       <p>
-        <strong>❤️ Charity Fund:</strong> ₹{tournament.charityFund}
+        <strong>👥 Max Players:</strong>{" "}
+        {tournament.max_players}
       </p>
 
       <p>
-        <strong>💰 Entry Fee:</strong> ₹{tournament.entryFee}
-      </p>
-
-      <p>
-        <strong>👥 Participants:</strong> {tournament.participants}
+        <strong>📝 Description:</strong>{" "}
+        {tournament.description}
       </p>
 
       <button
-        onClick={() => handleRegister(tournament.name)}
-        disabled={isRegistered}
-      >
-        {isRegistered ? "✅ Registered" : "Register Now"}
+           onClick={() =>
+              handleRegister(
+                  tournament.id,
+                  tournament.title
+        )
+    }
+    disabled={isRegistered}
+>
+        {isRegistered
+          ? "✅ Registered"
+          : "Register Now"}
       </button>
+
     </div>
+
   );
+
 }
 
 export default TournamentCard;

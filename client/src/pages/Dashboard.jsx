@@ -1,3 +1,8 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { getDashboard } from "../services/dashboardService";
+
 import "../styles/Dashboard.css";
 
 import DashboardHeader from "../components/DashboardHeader";
@@ -9,110 +14,116 @@ import QuickActions from "../components/QuickActions";
 
 function Dashboard() {
 
-  const user = {
-    name: "Gaurav Dwivedi",
-    subscription: "Premium",
-    totalTournaments: 8,
-    totalDonations: 35000,
-    currentRank: 12,
-  };
+    const navigate = useNavigate();
 
-  const upcomingTournament = {
-    name: "Jaipur Charity Golf Championship 2026",
-    location: "Rambagh Golf Club, Jaipur",
-    date: "20 August 2026",
-    entryFee: 999,
-    participants: 120,
-  };
+    const [loading, setLoading] = useState(true);
 
-  const tournamentHistory = [
-    {
-      id: 1,
-      name: "Delhi Open",
-      date: "15 June 2026",
-      rank: 3,
-      prize: 10000,
-    },
-    {
-      id: 2,
-      name: "Jaipur Golf Cup",
-      date: "22 May 2026",
-      rank: 1,
-      prize: 25000,
-    },
-    {
-      id: 3,
-      name: "Mumbai Championship",
-      date: "10 April 2026",
-      rank: 5,
-      prize: 5000,
-    },
-  ];
+    const [user, setUser] = useState(null);
 
-  const donations = [
-    {
-      id: 1,
-      charity: "Smile Foundation",
-      date: "12 July 2026",
-      amount: 5000,
-    },
-    {
-      id: 2,
-      charity: "Helping Hands",
-      date: "25 June 2026",
-      amount: 2500,
-    },
-    {
-      id: 3,
-      charity: "Green Earth",
-      date: "10 May 2026",
-      amount: 1000,
-    },
-  ];
+    useEffect(() => {
 
-  return (
-    <section className="dashboard">
+        fetchDashboard();
 
-      <DashboardHeader user={user} />
+    }, []);
 
-      <div className="stats-grid">
+    async function fetchDashboard() {
 
-        <StatsCard
-          title="Subscription"
-          value={user.subscription}
-          icon="💎"
-        />
+        try {
 
-        <StatsCard
-          title="Tournaments"
-          value={user.totalTournaments}
-          icon="🏌️"
-        />
+            const response = await getDashboard();
 
-        <StatsCard
-          title="Total Donations"
-          value={`₹${user.totalDonations}`}
-          icon="❤️"
-        />
+            setUser(response.data);
 
-        <StatsCard
-          title="Current Rank"
-          value={`#${user.currentRank}`}
-          icon="🏆"
-        />
+        } catch (error) {
 
-      </div>
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
 
-      <UpcomingTournament tournament={upcomingTournament} />
+            navigate("/login");
 
-      <TournamentHistory history={tournamentHistory} />
+        } finally {
 
-      <DonationHistory donations={donations} />
+            setLoading(false);
 
-      <QuickActions />
+        }
 
-    </section>
-  );
+    }
+
+    const upcomingTournament = {
+        name: "Jaipur Charity Golf Championship 2026",
+        location: "Rambagh Golf Club, Jaipur",
+        date: "20 August 2026",
+        entryFee: 999,
+        participants: 120,
+    };
+
+    const tournamentHistory = [];
+
+    const donations = [];
+
+    if (loading) {
+
+        return <h2>Loading Dashboard...</h2>;
+
+    }
+
+    return (
+
+        <section className="dashboard">
+
+            <DashboardHeader
+                user={{
+                    name: user.full_name,
+                    subscription: user.membership
+                }}
+            />
+
+            <div className="stats-grid">
+
+                <StatsCard
+                    title="Subscription"
+                    value={user.membership}
+                    icon="💎"
+                />
+
+                <StatsCard
+                    title="Registered Tournaments"
+                    value={user.tournaments}
+                    icon="🏌️"
+                />
+
+                <StatsCard
+                    title="Total Donations"
+                    value={`₹${user.donations}`}
+                    icon="❤️"
+                />
+
+                <StatsCard
+                    title="Membership"
+                    value={user.membership}
+                    icon="⭐"
+                />
+
+            </div>
+
+            <UpcomingTournament
+                tournament={upcomingTournament}
+            />
+
+            <TournamentHistory
+                history={tournamentHistory}
+            />
+
+            <DonationHistory
+                donations={donations}
+            />
+
+            <QuickActions />
+
+        </section>
+
+    );
+
 }
 
 export default Dashboard;
