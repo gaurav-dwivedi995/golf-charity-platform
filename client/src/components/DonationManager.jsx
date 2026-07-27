@@ -1,42 +1,95 @@
 function DonationManager({ donations }) {
-  return (
-    <div className="donation-manager">
 
-      <h2>Donation Management</h2>
+    return (
 
-      <table>
+        <div className="donation-manager">
 
-        <thead>
-          <tr>
-            <th>Donor</th>
-            <th>Charity</th>
-            <th>Amount</th>
-            <th>Date</th>
-          </tr>
-        </thead>
+            <h2>Donation Management</h2>
 
-        <tbody>
+            <table>
 
-          {donations.map((donation) => (
-            <tr key={donation.id}>
+                <thead>
 
-              <td>{donation.donor}</td>
+                    <tr>
 
-              <td>{donation.charity}</td>
+                        <th>Donor</th>
 
-              <td>₹{donation.amount}</td>
+                        <th>Email</th>
 
-              <td>{donation.date}</td>
+                        <th>Amount</th>
 
-            </tr>
-          ))}
+                        <th>Payment</th>
 
-        </tbody>
+                        <th>Transaction ID</th>
 
-      </table>
+                        <th>Date</th>
 
-    </div>
-  );
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {
+
+                        donations.length === 0 ? (
+
+                            <tr>
+
+                                <td colSpan="6">
+
+                                    No Donations Found
+
+                                </td>
+
+                            </tr>
+
+                        ) : (
+
+                            donations.map((donation) => (
+
+                                <tr key={donation.id}>
+
+                                    <td>{donation.full_name}</td>
+
+                                    <td>{donation.email}</td>
+
+                                    <td>₹{donation.amount}</td>
+
+                                    <td>{donation.payment_method}</td>
+
+                                    <td>{donation.transaction_id}</td>
+
+                                    <td>
+
+                                        {
+
+                                            new Date(
+
+                                                donation.donated_at
+
+                                            ).toLocaleDateString()
+
+                                        }
+
+                                    </td>
+
+                                </tr>
+
+                            ))
+
+                        )
+
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    );
+
 }
 
 export default DonationManager;

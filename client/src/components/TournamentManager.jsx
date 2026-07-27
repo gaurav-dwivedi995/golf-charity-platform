@@ -1,45 +1,143 @@
-function TournamentManager({ tournaments }) {
-  return (
-    <div className="tournament-manager">
+import { useEffect, useState } from "react";
 
-      <h2>Tournament Management</h2>
+import {
+    getAllTournaments,
+    deleteTournament
+} from "../services/tournamentService";
 
-      <table>
+function TournamentManager() {
 
-        <thead>
-          <tr>
-            <th>Tournament</th>
-            <th>Location</th>
-            <th>Date</th>
-            <th>Participants</th>
-            <th>Entry Fee</th>
-          </tr>
-        </thead>
+    const [tournaments, setTournaments] = useState([]);
 
-        <tbody>
+    useEffect(() => {
 
-          {tournaments.map((tournament) => (
-            <tr key={tournament.id}>
+        loadTournaments();
 
-              <td>{tournament.name}</td>
+    }, []);
 
-              <td>{tournament.location}</td>
+    async function loadTournaments() {
 
-              <td>{tournament.date}</td>
+        try {
 
-              <td>{tournament.participants}</td>
+            const response = await getAllTournaments();
 
-              <td>₹{tournament.entryFee}</td>
+            setTournaments(response.data);
 
-            </tr>
-          ))}
+        } catch (err) {
 
-        </tbody>
+            console.log(err);
 
-      </table>
+        }
 
-    </div>
-  );
+    }
+
+    async function handleDelete(id) {
+
+        if (!window.confirm("Delete Tournament?")) return;
+
+        try {
+
+            await deleteTournament(id);
+
+            alert("Tournament Deleted Successfully");
+
+            loadTournaments();
+
+        } catch (err) {
+
+            alert(
+                err.response?.data?.message ||
+                "Delete Failed"
+            );
+
+        }
+
+    }
+
+    return (
+
+        <div className="tournament-manager">
+
+            <h2>Tournament Management</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Title</th>
+
+                        <th>Location</th>
+
+                        <th>Date</th>
+
+                        <th>Entry Fee</th>
+
+                        <th>Players</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {
+
+                        tournaments.map((tournament) => (
+
+                            <tr key={tournament.id}>
+
+                                <td>{tournament.title}</td>
+
+                                <td>{tournament.location}</td>
+
+                                <td>
+                                    {
+                                        new Date(
+                                            tournament.tournament_date
+                                        ).toLocaleDateString()
+                                    }
+                                </td>
+
+                                <td>
+                                    ₹{tournament.entry_fee}
+                                </td>
+
+                                <td>
+                                    {tournament.max_players}
+                                </td>
+
+                                <td>
+
+                                    <button
+                                        onClick={() =>
+                                            handleDelete(
+                                                tournament.id
+                                            )
+                                        }
+                                    >
+                                        Delete
+                                    </button>
+
+                                </td>
+
+                            </tr>
+
+                        ))
+
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    );
+
 }
 
 export default TournamentManager;

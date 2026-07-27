@@ -1,3 +1,14 @@
+import { useEffect, useState } from "react";
+
+import {
+    getDashboard,
+    getUsers
+} from "../services/adminService";
+
+import {
+    getAllDonations
+} from "../services/donationService";
+
 import "../styles/AdminDashboard.css";
 
 import AdminHeader from "../components/AdminHeader";
@@ -10,144 +21,111 @@ import AdminActions from "../components/AdminActions";
 
 function AdminDashboard() {
 
-  const admin = {
-    name: "Admin",
-  };
+    const [stats, setStats] = useState(null);
 
-  const stats = [
-    {
-      id: 1,
-      title: "Total Users",
-      value: 250,
-      icon: "👥",
-    },
-    {
-      id: 2,
-      title: "Tournaments",
-      value: 12,
-      icon: "🏌️",
-    },
-    {
-      id: 3,
-      title: "Donations",
-      value: "₹8,50,000",
-      icon: "❤️",
-    },
-    {
-      id: 4,
-      title: "Subscriptions",
-      value: 185,
-      icon: "💎",
-    },
-  ];
+    const [users, setUsers] = useState([]);
 
-  const users = [
-    {
-      id: 1,
-      name: "Gaurav Dwivedi",
-      email: "gaurav@gmail.com",
-      subscription: "Premium",
-      status: "Active",
-    },
-    {
-      id: 2,
-      name: "Rahul Sharma",
-      email: "rahul@gmail.com",
-      subscription: "Basic",
-      status: "Active",
-    },
-    {
-      id: 3,
-      name: "Amit Singh",
-      email: "amit@gmail.com",
-      subscription: "Premium",
-      status: "Inactive",
-    },
-  ];
+    const [donations, setDonations] = useState([]);
 
-  const tournaments = [
-    {
-      id: 1,
-      name: "Jaipur Championship",
-      location: "Jaipur",
-      date: "20 August 2026",
-      participants: 120,
-      entryFee: 999,
-    },
-    {
-      id: 2,
-      name: "Delhi Open",
-      location: "Delhi",
-      date: "5 September 2026",
-      participants: 95,
-      entryFee: 1499,
-    },
-  ];
+    useEffect(() => {
 
-  const donations = [
-    {
-      id: 1,
-      donor: "Gaurav",
-      charity: "Smile Foundation",
-      amount: 5000,
-      date: "15 July 2026",
-    },
-    {
-      id: 2,
-      donor: "Rahul",
-      charity: "Helping Hands",
-      amount: 2500,
-      date: "20 July 2026",
-    },
-  ];
+        loadDashboard();
 
-  const subscriptions = [
-    {
-      id: 1,
-      name: "Basic",
-      price: 999,
-      duration: 30,
-      subscribers: 70,
-    },
-    {
-      id: 2,
-      name: "Premium",
-      price: 1999,
-      duration: 90,
-      subscribers: 115,
-    },
-  ];
+    }, []);
 
-  return (
-    <section className="admin-dashboard">
+    async function loadDashboard() {
 
-      <AdminHeader admin={admin} />
+        try {
 
-      <div className="admin-stats-grid">
+            const statsResponse = await getDashboard();
 
-        {stats.map((stat) => (
-          <AdminStatsCard
-            key={stat.id}
-            title={stat.title}
-            value={stat.value}
-            icon={stat.icon}
-          />
-        ))}
+            const usersResponse = await getUsers();
 
-      </div>
+            const donationResponse = await getAllDonations();
 
-      <UsersTable users={users} />
+            setStats(statsResponse.data);
 
-      <TournamentManager tournaments={tournaments} />
+            setUsers(usersResponse.data);
 
-      <DonationManager donations={donations} />
+            setDonations(donationResponse.data);
 
-      <SubscriptionManager subscriptions={subscriptions} />
+        }
 
-      <AdminActions />
+        catch (err) {
 
-    </section>
-  );
+            console.log(err);
+
+        }
+
+    }
+
+    const admin = {
+        name: "Admin"
+    };
+
+    const subscriptions = [];
+
+    if (!stats) {
+
+        return <h2>Loading...</h2>;
+
+    }
+
+    return (
+
+        <section className="admin-dashboard">
+
+            <AdminHeader admin={admin} />
+
+            <div className="admin-stats-grid">
+
+                <AdminStatsCard
+                    title="Total Users"
+                    value={stats.totalUsers}
+                    icon="👥"
+                />
+
+                <AdminStatsCard
+                    title="Tournaments"
+                    value={stats.totalTournaments}
+                    icon="🏌️"
+                />
+
+                <AdminStatsCard
+                    title="Donations"
+                    value={`₹${stats.totalDonationAmount}`}
+                    icon="❤️"
+                />
+
+                <AdminStatsCard
+                    title="Subscriptions"
+                    value={stats.totalSubscriptions}
+                    icon="💎"
+                />
+
+            </div>
+
+            <UsersTable
+                users={users}
+                refreshUsers={loadDashboard}
+            />
+
+            <TournamentManager />
+
+            <DonationManager
+                donations={donations}
+            />
+
+            <SubscriptionManager
+                subscriptions={subscriptions}
+            />
+
+            <AdminActions />
+
+        </section>
+
+    );
+
 }
 
 export default AdminDashboard;

@@ -3,7 +3,7 @@
     background:#f5f7fa;
 }
 
-/* ================= HEADER ================= */
+/* Header */
 
 .admin-header{
     text-align:center;
@@ -13,15 +13,14 @@
 .admin-header h1{
     font-size:42px;
     color:#2b7a3d;
-    margin-bottom:10px;
 }
 
 .admin-header p{
-    font-size:18px;
-    color:#555;
+    color:#666;
+    margin-top:10px;
 }
 
-/* ================= STATS ================= */
+/* Stats */
 
 .admin-stats-grid{
     display:grid;
@@ -32,126 +31,182 @@
 
 .admin-stats-card{
     background:#fff;
-    padding:30px;
     border-radius:12px;
+    padding:30px;
     text-align:center;
     box-shadow:0 5px 15px rgba(0,0,0,.08);
-    transition:.3s;
-}
-
-.admin-stats-card:hover{
-    transform:translateY(-6px);
 }
 
 .admin-icon{
-    font-size:45px;
-    margin-bottom:15px;
+    font-size:42px;
+    margin-bottom:10px;
 }
 
 .admin-stats-card h3{
     color:#666;
-    margin-bottom:12px;
 }
 
 .admin-stats-card h2{
     color:#2b7a3d;
-    font-size:32px;
+    margin-top:10px;
 }
 
-/* ================= TABLES ================= */
+/* Sections */
 
 .users-table,
 .tournament-manager,
 .donation-manager,
-.subscription-manager{
+.subscription-manager,
+.admin-actions{
+
     margin-top:50px;
+
 }
 
 .users-table h2,
 .tournament-manager h2,
 .donation-manager h2,
-.subscription-manager h2{
-    color:#2b7a3d;
+.subscription-manager h2,
+.admin-actions h2{
+
     margin-bottom:20px;
+    color:#2b7a3d;
+
 }
 
+/* Table */
+
 table{
+
     width:100%;
     border-collapse:collapse;
-    background:#fff;
+    background:white;
     border-radius:12px;
     overflow:hidden;
     box-shadow:0 5px 15px rgba(0,0,0,.08);
+
 }
 
 th{
+
     background:#2b7a3d;
-    color:#fff;
+    color:white;
     padding:15px;
+
 }
 
 td{
+
     padding:15px;
-    border-bottom:1px solid #eee;
     text-align:center;
+    border-bottom:1px solid #eee;
+
 }
 
 tr:hover{
-    background:#f7f7f7;
+
+    background:#f8f8f8;
+
 }
 
-/* ================= ACTIONS ================= */
-
-.admin-actions{
-    margin-top:60px;
-}
-
-.admin-actions h2{
-    color:#2b7a3d;
-    margin-bottom:20px;
-}
+/* Buttons */
 
 .admin-action-buttons{
+
     display:flex;
     flex-wrap:wrap;
     gap:20px;
+
 }
 
 .admin-action-buttons button{
+
     flex:1;
     min-width:220px;
+
     padding:15px;
+
     border:none;
-    border-radius:10px;
+    border-radius:8px;
+
     background:#2b7a3d;
-    color:#fff;
-    font-size:16px;
+
+    color:white;
+
     cursor:pointer;
+
     transition:.3s;
+
 }
 
 .admin-action-buttons button:hover{
+
     background:#1f5d2e;
+
 }
 
-/* ================= MOBILE ================= */
+/* Tournament Form */
+
+.create-tournament-form{
+
+    display:grid;
+    gap:15px;
+    margin-top:20px;
+
+}
+
+.create-tournament-form input,
+.create-tournament-form textarea{
+
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+
+}
+
+.create-tournament-form button{
+
+    padding:14px;
+    border:none;
+    border-radius:8px;
+    background:#2b7a3d;
+    color:white;
+    cursor:pointer;
+
+}
+
+.create-tournament-form button:hover{
+
+    background:#1f5d2e;
+
+}
+
+/* Mobile */
 
 @media(max-width:768px){
 
 .admin-dashboard{
+
     padding:40px 20px;
+
 }
 
-.admin-header h1{
-    font-size:32px;
+.admin-stats-grid{
+
+    grid-template-columns:1fr;
+
 }
 
 .admin-action-buttons{
+
     flex-direction:column;
+
 }
 
 table{
+
     font-size:14px;
+
 }
 
 }
