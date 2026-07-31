@@ -1,40 +1,57 @@
+import { useNavigate } from "react-router-dom";
+
 function ProfileActions() {
 
-  function handleEditProfile() {
-    alert("Edit Profile feature will be available soon.");
-  }
+    const navigate = useNavigate();
 
-  function handleChangePassword() {
-    alert("Change Password feature will be available soon.");
-  }
+    function handleEditProfile() {
 
-  function handleLogout() {
-    alert("Logout Successful.");
-  }
+        navigate("/profile/edit");
 
-  return (
-    <div className="profile-actions">
+    }
 
-      <h2>Account Actions</h2>
+    function handleChangePassword() {
 
-      <div className="profile-action-buttons">
+        navigate("/change-password");
 
-        <button onClick={handleEditProfile}>
-          Edit Profile
-        </button>
+    }
 
-        <button onClick={handleChangePassword}>
-          Change Password
-        </button>
+    function handleLogout() {
 
-        <button onClick={handleLogout}>
-          Logout
-        </button>
+        localStorage.removeItem("token");
 
-      </div>
+        localStorage.removeItem("user");
 
-    </div>
-  );
+        navigate("/login");
+
+    }
+
+    return (
+
+        <div className="profile-actions">
+
+            <h2>Account Actions</h2>
+
+            <div className="profile-action-buttons">
+
+                <button onClick={handleEditProfile}>
+                    Edit Profile
+                </button>
+
+                <button onClick={handleChangePassword}>
+                    Change Password
+                </button>
+
+                <button onClick={handleLogout}>
+                    Logout
+                </button>
+
+            </div>
+
+        </div>
+
+    );
+
 }
 
 export default ProfileActions;

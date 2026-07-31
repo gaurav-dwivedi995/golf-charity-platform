@@ -1,30 +1,35 @@
 import profileImage from "../assets/oggy.jpeg";
+
 function ProfileCard({ user }) {
-  return (
-    <div className="profile-card">
 
-      <img
-  src={profileImage}
-  alt="Mr. Oggy"
-  className="profile-image"
-/>
+    return (
 
-      <h2>{user.name}</h2>
+        <div className="profile-card">
 
-      <p>
-        <strong>Email:</strong> {user.email}
-      </p>
+            <img
+                src={profileImage}
+                alt={user.name}
+                className="profile-image"
+            />
 
-      <p>
-        <strong>Phone:</strong> {user.phone}
-      </p>
+            <h2>{user.name}</h2>
 
-      <p>
-        <strong>Membership:</strong> {user.membership}
-      </p>
+            <p>
+                <strong>Email :</strong> {user.email}
+            </p>
 
-    </div>
-  );
+            <p>
+                <strong>Phone :</strong> {user.phone}
+            </p>
+
+            <p>
+                <strong>Membership :</strong> {user.membership}
+            </p>
+
+        </div>
+
+    );
+
 }
 
 export default ProfileCard;

@@ -1,5 +1,6 @@
 const db = require("../config/db");
 
+// Buy Subscription
 const buySubscription = (
     user_id,
     plan_name,
@@ -19,8 +20,7 @@ const buySubscription = (
             start_date,
             end_date
         )
-        VALUES
-        (?, ?, ?, 'Active', ?, ?)
+        VALUES (?, ?, ?, 'Active', ?, ?)
     `;
 
     db.query(
@@ -37,6 +37,29 @@ const buySubscription = (
 
 };
 
+// All Subscriptions
+const getAllSubscriptions = (callback) => {
+
+    const sql = `
+        SELECT
+            subscriptions.id,
+            subscriptions.plan_name,
+            subscriptions.amount,
+            subscriptions.start_date,
+            subscriptions.end_date,
+            subscriptions.status,
+            users.full_name
+        FROM subscriptions
+        JOIN users
+        ON users.id = subscriptions.user_id
+        ORDER BY subscriptions.id DESC
+    `;
+
+    db.query(sql, callback);
+
+};
+
 module.exports = {
-    buySubscription
+    buySubscription,
+    getAllSubscriptions
 };

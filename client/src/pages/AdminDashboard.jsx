@@ -6,8 +6,20 @@ import {
 } from "../services/adminService";
 
 import {
+    getAllTournaments
+} from "../services/tournamentService";
+
+import {
     getAllDonations
 } from "../services/donationService";
+
+import {
+    getAllSubscriptions
+} from "../services/subscriptionService";
+
+import {
+    getReport
+} from "../services/reportService";
 
 import "../styles/AdminDashboard.css";
 
@@ -17,6 +29,7 @@ import UsersTable from "../components/UsersTable";
 import TournamentManager from "../components/TournamentManager";
 import DonationManager from "../components/DonationManager";
 import SubscriptionManager from "../components/SubscriptionManager";
+import ReportDashboard from "../components/ReportDashboard";
 import AdminActions from "../components/AdminActions";
 
 function AdminDashboard() {
@@ -25,7 +38,13 @@ function AdminDashboard() {
 
     const [users, setUsers] = useState([]);
 
+    const [tournaments, setTournaments] = useState([]);
+
     const [donations, setDonations] = useState([]);
+
+    const [subscriptions, setSubscriptions] = useState([]);
+
+    const [report, setReport] = useState(null);
 
     useEffect(() => {
 
@@ -37,17 +56,40 @@ function AdminDashboard() {
 
         try {
 
-            const statsResponse = await getDashboard();
+            const [
+                statsResponse,
+                usersResponse,
+                tournamentResponse,
+                donationResponse,
+                subscriptionResponse,
+                reportResponse
+            ] = await Promise.all([
 
-            const usersResponse = await getUsers();
+                getDashboard(),
 
-            const donationResponse = await getAllDonations();
+                getUsers(),
+
+                getAllTournaments(),
+
+                getAllDonations(),
+
+                getAllSubscriptions(),
+
+                getReport()
+
+            ]);
 
             setStats(statsResponse.data);
 
             setUsers(usersResponse.data);
 
+            setTournaments(tournamentResponse.data);
+
             setDonations(donationResponse.data);
+
+            setSubscriptions(subscriptionResponse.data);
+
+            setReport(reportResponse.data);
 
         }
 
@@ -59,13 +101,7 @@ function AdminDashboard() {
 
     }
 
-    const admin = {
-        name: "Admin"
-    };
-
-    const subscriptions = [];
-
-    if (!stats) {
+    if (!stats || !report) {
 
         return <h2>Loading...</h2>;
 
@@ -75,7 +111,9 @@ function AdminDashboard() {
 
         <section className="admin-dashboard">
 
-            <AdminHeader admin={admin} />
+            <AdminHeader
+                admin={{ name: "Admin" }}
+            />
 
             <div className="admin-stats-grid">
 
@@ -110,7 +148,9 @@ function AdminDashboard() {
                 refreshUsers={loadDashboard}
             />
 
-            <TournamentManager />
+            <TournamentManager
+                tournaments={tournaments}
+            />
 
             <DonationManager
                 donations={donations}
@@ -120,7 +160,13 @@ function AdminDashboard() {
                 subscriptions={subscriptions}
             />
 
-            <AdminActions />
+            <ReportDashboard
+                report={report}
+            />
+
+            <AdminActions
+                refreshDashboard={loadDashboard}
+            />
 
         </section>
 

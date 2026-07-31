@@ -1,42 +1,91 @@
 function SubscriptionManager({ subscriptions }) {
-  return (
-    <div className="subscription-manager">
 
-      <h2>Subscription Management</h2>
+    console.log("Subscriptions =>", subscriptions);
 
-      <table>
+    return (
 
-        <thead>
-          <tr>
-            <th>Plan</th>
-            <th>Price</th>
-            <th>Duration</th>
-            <th>Subscribers</th>
-          </tr>
-        </thead>
+        <div className="subscription-manager">
 
-        <tbody>
+            <h2>Subscription Management</h2>
 
-          {subscriptions.map((plan) => (
-            <tr key={plan.id}>
+            <h3 style={{ color: "red" }}>
+                Total Subscriptions : {subscriptions.length}
+            </h3>
 
-              <td>{plan.name}</td>
+            <table>
 
-              <td>₹{plan.price}</td>
+                <thead>
 
-              <td>{plan.duration} Days</td>
+                    <tr>
 
-              <td>{plan.subscribers}</td>
+                        <th>User</th>
+                        <th>Plan</th>
+                        <th>Amount</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Status</th>
 
-            </tr>
-          ))}
+                    </tr>
 
-        </tbody>
+                </thead>
 
-      </table>
+                <tbody>
 
-    </div>
-  );
+                    {
+                        subscriptions.length === 0 ? (
+
+                            <tr>
+
+                                <td
+                                    colSpan="6"
+                                    style={{
+                                        textAlign: "center",
+                                        color: "red",
+                                        fontWeight: "bold"
+                                    }}
+                                >
+                                    No Subscription Found
+                                </td>
+
+                            </tr>
+
+                        ) : (
+
+                            subscriptions.map((sub) => (
+
+                                <tr key={sub.id}>
+
+                                    <td>{sub.full_name}</td>
+
+                                    <td>{sub.plan_name}</td>
+
+                                    <td>₹{sub.amount}</td>
+
+                                    <td>
+                                        {new Date(sub.start_date).toLocaleDateString()}
+                                    </td>
+
+                                    <td>
+                                        {new Date(sub.end_date).toLocaleDateString()}
+                                    </td>
+
+                                    <td>{sub.status}</td>
+
+                                </tr>
+
+                            ))
+
+                        )
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    );
+
 }
 
 export default SubscriptionManager;

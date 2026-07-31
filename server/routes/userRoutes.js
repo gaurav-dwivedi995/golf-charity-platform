@@ -5,26 +5,20 @@ const router = express.Router();
 const verifyToken = require("../middleware/authMiddleware");
 
 const {
-    signup,
-    login,
-    profile,
-    changePassword
-} = require("../controllers/authController");
-
-router.post("/signup", signup);
-
-router.post("/login", login);
+    getProfile,
+    editProfile
+} = require("../controllers/userController");
 
 router.get(
     "/profile",
     verifyToken,
-    profile
+    getProfile
 );
 
 router.put(
-    "/change-password",
+    "/profile/update",
     verifyToken,
-    changePassword
+    editProfile
 );
 
 module.exports = router;

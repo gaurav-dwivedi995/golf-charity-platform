@@ -1,35 +1,103 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "../styles/Navbar.css";
 
 function Navbar() {
-  return (
-    <nav className="navbar">
 
-      <h2 className="logo">Golf Charity</h2>
+    const [menuOpen, setMenuOpen] = useState(false);
 
-      <div className="nav-links">
+    return (
 
-        <NavLink to="/">Home</NavLink>
+        <nav className="navbar">
 
-        <NavLink to="/scores">Scores</NavLink>
+            <h2 className="logo">
+                Golf Charity
+            </h2>
 
-        <NavLink to="/subscription">Subscription</NavLink>
+            <div
+                className="menu-icon"
+                onClick={() => setMenuOpen(!menuOpen)}
+            >
+                ☰
+            </div>
 
-        <NavLink to="/charity">Charity</NavLink>
+            <div
+                className={
+                    menuOpen
+                        ? "nav-links active"
+                        : "nav-links"
+                }
+            >
 
-        <NavLink to="/dashboard">Dashboard</NavLink>
+                <NavLink
+                    to="/"
+                    onClick={() => setMenuOpen(false)}
+                >
+                    Home
+                </NavLink>
 
-        <NavLink to="/admin-dashboard">Admin</NavLink>
+                <NavLink
+                    to="/scores"
+                    onClick={() => setMenuOpen(false)}
+                >
+                    Scores
+                </NavLink>
 
-        <NavLink to="/login">Login</NavLink>
+                <NavLink
+                    to="/subscription"
+                    onClick={() => setMenuOpen(false)}
+                >
+                    Subscription
+                </NavLink>
 
-        <NavLink to="/signup">Signup</NavLink>
+                <NavLink
+                    to="/charity"
+                    onClick={() => setMenuOpen(false)}
+                >
+                    Charity
+                </NavLink>
 
+                <NavLink
+                    to="/dashboard"
+                    onClick={() => setMenuOpen(false)}
+                >
+                    Dashboard
+                </NavLink>
 
-      </div>
+                <NavLink
+                    to="/admin-dashboard"
+                    onClick={() => setMenuOpen(false)}
+                >
+                    Admin
+                </NavLink>
 
-    </nav>
-  );
+                <NavLink
+                    to="/login"
+                    onClick={() => setMenuOpen(false)}
+                >
+                    Login
+                </NavLink>
+
+                <NavLink
+                    to="/signup"
+                    onClick={() => setMenuOpen(false)}
+                >
+                    Signup
+                </NavLink>
+
+                <NavLink 
+                to="/tournament"
+                onClick={() => setMenuOpen(false)}
+                >
+                  Tournament
+                  </NavLink>
+
+            </div>
+
+        </nav>
+
+    );
+
 }
 
 export default Navbar;

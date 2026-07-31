@@ -1,91 +1,117 @@
 .dashboard{
+
     padding:80px 60px;
     background:#f5f7fa;
+    min-height:100vh;
+
 }
 
-/* ================= HEADER ================= */
-
 .dashboard-header{
+
     text-align:center;
     margin-bottom:50px;
+
 }
 
 .dashboard-header h1{
+
     font-size:42px;
     color:#2b7a3d;
     margin-bottom:10px;
+
 }
 
 .dashboard-header p{
+
     font-size:18px;
     color:#555;
+
 }
 
-/* ================= STATS ================= */
-
 .stats-grid{
+
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
     gap:25px;
     margin-bottom:50px;
+
 }
 
 .stats-card{
+
     background:#fff;
     padding:30px;
     border-radius:12px;
     text-align:center;
     box-shadow:0 5px 15px rgba(0,0,0,.08);
     transition:.3s;
+
 }
 
 .stats-card:hover{
+
     transform:translateY(-6px);
+
 }
 
 .stats-icon{
+
     font-size:45px;
     margin-bottom:15px;
+
 }
 
 .stats-card h3{
+
     color:#666;
     margin-bottom:12px;
+
 }
 
 .stats-card h2{
+
     color:#2b7a3d;
     font-size:32px;
+
 }
 
-/* ================= UPCOMING ================= */
-
 .upcoming-tournament{
+
     margin-bottom:50px;
+
 }
 
 .upcoming-tournament h2{
+
     color:#2b7a3d;
     margin-bottom:20px;
+
 }
 
 .upcoming-card{
+
     background:#fff;
     padding:30px;
     border-radius:12px;
     box-shadow:0 5px 15px rgba(0,0,0,.08);
+
 }
 
 .upcoming-card h3{
+
     margin-bottom:20px;
     color:#2b7a3d;
+
 }
 
 .upcoming-card p{
+
     margin-bottom:12px;
+
 }
 
 .upcoming-card button{
+
     margin-top:20px;
     padding:12px 25px;
     border:none;
@@ -93,68 +119,91 @@
     background:#2b7a3d;
     color:#fff;
     cursor:pointer;
+    transition:.3s;
+
 }
 
 .upcoming-card button:hover{
-    background:#1f5d2e;
-}
 
-/* ================= TABLE ================= */
+    background:#1f5d2e;
+
+}
 
 .tournament-history,
 .donation-history{
+
     margin-top:50px;
+    overflow-x:auto;
+
 }
 
 .tournament-history h2,
 .donation-history h2{
+
     color:#2b7a3d;
     margin-bottom:20px;
+
 }
 
 table{
+
     width:100%;
+    min-width:700px;
     border-collapse:collapse;
     background:#fff;
     border-radius:12px;
     overflow:hidden;
     box-shadow:0 5px 15px rgba(0,0,0,.08);
+
 }
 
 th{
+
     background:#2b7a3d;
     color:#fff;
     padding:15px;
+    white-space:nowrap;
+
 }
 
 td{
+
     padding:15px;
     border-bottom:1px solid #eee;
     text-align:center;
+    white-space:nowrap;
+
 }
 
 tr:hover{
+
     background:#f7f7f7;
+
 }
 
-/* ================= QUICK ACTION ================= */
-
 .quick-actions{
+
     margin-top:60px;
+
 }
 
 .quick-actions h2{
+
     color:#2b7a3d;
     margin-bottom:20px;
+
 }
 
 .actions{
+
     display:flex;
     flex-wrap:wrap;
     gap:20px;
+
 }
 
 .action-btn{
+
     flex:1;
     min-width:220px;
     padding:15px;
@@ -165,26 +214,157 @@ tr:hover{
     font-size:16px;
     cursor:pointer;
     transition:.3s;
+
 }
 
 .action-btn:hover{
+
     background:#1f5d2e;
+
 }
 
-/* ================= MOBILE ================= */
+@media (max-width:992px){
 
-@media(max-width:768px){
+    .dashboard{
 
-.dashboard{
-    padding:40px 20px;
+        padding:60px 30px;
+
+    }
+
+    .dashboard-header h1{
+
+        font-size:36px;
+
+    }
+
 }
 
-.dashboard-header h1{
-    font-size:32px;
+@media (max-width:768px){
+
+    .dashboard{
+
+        padding:40px 20px;
+
+    }
+
+    .dashboard-header h1{
+
+        font-size:30px;
+
+    }
+
+    .dashboard-header p{
+
+        font-size:15px;
+
+    }
+
+    .stats-card{
+
+        padding:22px;
+
+    }
+
+    .stats-card h2{
+
+        font-size:26px;
+
+    }
+
+    .upcoming-card{
+
+        padding:20px;
+
+    }
+
+    .actions{
+
+        flex-direction:column;
+
+    }
+
+    .action-btn{
+
+        width:100%;
+
+    }
+
 }
 
-.actions{
-    flex-direction:column;
-}
+@media (max-width:480px){
+
+    .dashboard{
+
+        padding:25px 15px;
+
+    }
+
+    .dashboard-header{
+
+        margin-bottom:35px;
+
+    }
+
+    .dashboard-header h1{
+
+        font-size:26px;
+
+    }
+
+    .dashboard-header p{
+
+        font-size:14px;
+
+    }
+
+    .stats-grid{
+
+        gap:18px;
+
+    }
+
+    .stats-card{
+
+        padding:18px;
+
+    }
+
+    .stats-icon{
+
+        font-size:34px;
+
+    }
+
+    .stats-card h3{
+
+        font-size:16px;
+
+    }
+
+    .stats-card h2{
+
+        font-size:22px;
+
+    }
+
+    .upcoming-card{
+
+        padding:18px;
+
+    }
+
+    .upcoming-card button{
+
+        width:100%;
+
+    }
+
+    th,
+    td{
+
+        padding:12px;
+        font-size:13px;
+
+    }
 
 }

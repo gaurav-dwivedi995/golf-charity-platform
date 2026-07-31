@@ -1,31 +1,50 @@
+import { useNavigate } from "react-router-dom";
+
 function QuickActions() {
-  return (
-    <div className="quick-actions">
 
-      <h2>Quick Actions</h2>
+    const navigate = useNavigate();
 
-      <div className="actions">
+    return (
 
-        <button className="action-btn">
-          Register Tournament
-        </button>
+        <div className="quick-actions">
 
-        <button className="action-btn">
-          Donate Now
-        </button>
+            <h2>Quick Actions</h2>
 
-        <button className="action-btn">
-          Upgrade Plan
-        </button>
+            <div className="actions">
 
-        <button className="action-btn">
-          Edit Profile
-        </button>
+                <button
+                    className="action-btn"
+                    onClick={() => navigate("/tournament")}
+                >
+                    Register Tournament
+                </button>
 
-      </div>
+                <button
+                    className="action-btn"
+                    onClick={() => navigate("/charity")}
+                >
+                    Donate Now
+                </button>
 
-    </div>
-  );
+                <button
+                    className="action-btn"
+                    onClick={() => navigate("/subscription")}
+                >
+                    Upgrade Plan
+                </button>
+
+                <button
+                    className="action-btn"
+                    onClick={() => navigate("/profile")}
+                >
+                    Edit Profile
+                </button>
+
+            </div>
+
+        </div>
+
+    );
 }
 
 export default QuickActions;

@@ -1,62 +1,86 @@
 .admin-dashboard{
+
     padding:80px 60px;
     background:#f5f7fa;
+    min-height:100vh;
+
 }
 
-/* Header */
-
 .admin-header{
+
     text-align:center;
     margin-bottom:50px;
+
 }
 
 .admin-header h1{
+
     font-size:42px;
     color:#2b7a3d;
+
 }
 
 .admin-header p{
+
     color:#666;
     margin-top:10px;
+    font-size:16px;
+
 }
 
-/* Stats */
-
 .admin-stats-grid{
+
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
     gap:25px;
     margin-bottom:50px;
+
 }
 
 .admin-stats-card{
+
     background:#fff;
     border-radius:12px;
     padding:30px;
     text-align:center;
     box-shadow:0 5px 15px rgba(0,0,0,.08);
+    transition:.3s;
+
+}
+
+.admin-stats-card:hover{
+
+    transform:translateY(-5px);
+
 }
 
 .admin-icon{
+
     font-size:42px;
     margin-bottom:10px;
+
 }
 
 .admin-stats-card h3{
+
     color:#666;
+    font-size:18px;
+
 }
 
 .admin-stats-card h2{
+
     color:#2b7a3d;
     margin-top:10px;
-}
+    font-size:30px;
 
-/* Sections */
+}
 
 .users-table,
 .tournament-manager,
 .donation-manager,
 .subscription-manager,
+.report-dashboard,
 .admin-actions{
 
     margin-top:50px;
@@ -67,6 +91,7 @@
 .tournament-manager h2,
 .donation-manager h2,
 .subscription-manager h2,
+.report-dashboard h2,
 .admin-actions h2{
 
     margin-bottom:20px;
@@ -74,13 +99,22 @@
 
 }
 
-/* Table */
+.users-table,
+.tournament-manager,
+.donation-manager,
+.subscription-manager,
+.report-dashboard{
+
+    overflow-x:auto;
+
+}
 
 table{
 
     width:100%;
+    min-width:700px;
     border-collapse:collapse;
-    background:white;
+    background:#fff;
     border-radius:12px;
     overflow:hidden;
     box-shadow:0 5px 15px rgba(0,0,0,.08);
@@ -90,8 +124,9 @@ table{
 th{
 
     background:#2b7a3d;
-    color:white;
+    color:#fff;
     padding:15px;
+    white-space:nowrap;
 
 }
 
@@ -100,6 +135,7 @@ td{
     padding:15px;
     text-align:center;
     border-bottom:1px solid #eee;
+    white-space:nowrap;
 
 }
 
@@ -108,9 +144,6 @@ tr:hover{
     background:#f8f8f8;
 
 }
-
-/* Buttons */
-
 .admin-action-buttons{
 
     display:flex;
@@ -131,7 +164,7 @@ tr:hover{
 
     background:#2b7a3d;
 
-    color:white;
+    color:#fff;
 
     cursor:pointer;
 
@@ -145,13 +178,18 @@ tr:hover{
 
 }
 
-/* Tournament Form */
-
 .create-tournament-form{
 
     display:grid;
+    grid-template-columns:1fr 1fr;
     gap:15px;
     margin-top:20px;
+
+}
+
+.create-tournament-form textarea{
+
+    grid-column:1 / -1;
 
 }
 
@@ -161,17 +199,33 @@ tr:hover{
     padding:12px;
     border:1px solid #ccc;
     border-radius:8px;
+    outline:none;
+
+}
+
+.create-tournament-form input:focus,
+.create-tournament-form textarea:focus{
+
+    border-color:#2b7a3d;
 
 }
 
 .create-tournament-form button{
 
+    grid-column:1 / -1;
+
     padding:14px;
+
     border:none;
     border-radius:8px;
+
     background:#2b7a3d;
-    color:white;
+
+    color:#fff;
+
     cursor:pointer;
+
+    transition:.3s;
 
 }
 
@@ -181,32 +235,149 @@ tr:hover{
 
 }
 
-/* Mobile */
+@media (max-width:992px){
 
-@media(max-width:768px){
+    .admin-dashboard{
 
-.admin-dashboard{
+        padding:60px 30px;
 
-    padding:40px 20px;
+    }
 
-}
+    .admin-header h1{
 
-.admin-stats-grid{
+        font-size:36px;
 
-    grid-template-columns:1fr;
-
-}
-
-.admin-action-buttons{
-
-    flex-direction:column;
+    }
 
 }
 
-table{
+@media (max-width:768px){
 
-    font-size:14px;
+    .admin-dashboard{
+
+        padding:40px 20px;
+
+    }
+
+    .admin-header h1{
+
+        font-size:30px;
+
+    }
+
+    .admin-header p{
+
+        font-size:14px;
+
+    }
+
+    .admin-stats-card{
+
+        padding:22px;
+
+    }
+
+    .admin-stats-card h2{
+
+        font-size:24px;
+
+    }
+
+    .admin-action-buttons{
+
+        flex-direction:column;
+
+    }
+
+    .admin-action-buttons button{
+
+        width:100%;
+
+    }
+
+    .create-tournament-form{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .create-tournament-form textarea{
+
+        grid-column:auto;
+
+    }
+
+    .create-tournament-form button{
+
+        grid-column:auto;
+
+    }
 
 }
+
+@media (max-width:480px){
+
+    .admin-dashboard{
+
+        padding:25px 15px;
+
+    }
+
+    .admin-header{
+
+        margin-bottom:35px;
+
+    }
+
+    .admin-header h1{
+
+        font-size:26px;
+
+    }
+
+    .admin-header p{
+
+        font-size:13px;
+
+    }
+
+    .admin-stats-grid{
+
+        gap:18px;
+
+    }
+
+    .admin-stats-card{
+
+        padding:18px;
+
+    }
+
+    .admin-icon{
+
+        font-size:34px;
+
+    }
+
+    .admin-stats-card h3{
+
+        font-size:16px;
+
+    }
+
+    .admin-stats-card h2{
+
+        font-size:22px;
+
+    }
+
+    th,
+    td{
+
+        padding:12px;
+
+        font-size:13px;
+
+    }
 
 }

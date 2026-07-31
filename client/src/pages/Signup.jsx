@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import API from "../services/api";
 import "../styles/Signup.css";
 
 function Signup() {
+
+    const navigate = useNavigate();
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -41,6 +44,8 @@ function Signup() {
             setPassword("");
             setConfirmPassword("");
 
+            navigate("/login");
+
         } catch (error) {
 
             alert(
@@ -67,35 +72,35 @@ function Signup() {
                     type="text"
                     placeholder="Full Name"
                     value={name}
-                    onChange={(e)=>setName(e.target.value)}
+                    onChange={(e) => setName(e.target.value)}
                 />
 
                 <input
                     type="email"
                     placeholder="Email Address"
                     value={email}
-                    onChange={(e)=>setEmail(e.target.value)}
+                    onChange={(e) => setEmail(e.target.value)}
                 />
 
                 <input
                     type="tel"
                     placeholder="Phone Number"
                     value={phone}
-                    onChange={(e)=>setPhone(e.target.value)}
+                    onChange={(e) => setPhone(e.target.value)}
                 />
 
                 <input
                     type="password"
                     placeholder="Password"
                     value={password}
-                    onChange={(e)=>setPassword(e.target.value)}
+                    onChange={(e) => setPassword(e.target.value)}
                 />
 
                 <input
                     type="password"
                     placeholder="Confirm Password"
                     value={confirmPassword}
-                    onChange={(e)=>setConfirmPassword(e.target.value)}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                 />
 
                 <button type="submit">

@@ -12,46 +12,89 @@ import Dashboard from "./pages/Dashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import Profile from "./pages/Profile";
 import Leaderboard from "./pages/Leaderboard";
+import EditProfile from "./pages/EditProfile";
+import ChangePassword from "./pages/ChangePassword";
+
+import Tournament from "./components/Tournament";
 
 function App() {
 
-  return (
+    return (
 
-    <Routes>
+        <Routes>
 
-      <Route element={<MainLayout />}>
+            <Route element={<MainLayout />}>
 
-        <Route path="/" element={<Home />} />
+                <Route
+                    path="/"
+                    element={<Home />}
+                />
 
-        <Route path="/scores" element={<Scores />} />
+                <Route
+                    path="/scores"
+                    element={<Scores />}
+                />
 
-        <Route path="/subscription" element={<Subscription />} />
+                <Route
+                    path="/subscription"
+                    element={<Subscription />}
+                />
 
-        <Route path="/charity" element={<Charity />} />
+                <Route
+                    path="/tournament"
+                    element={<Tournament />}
+                />
 
-        <Route path="/dashboard" element={<Dashboard />} />
+                <Route
+                    path="/charity"
+                    element={<Charity />}
+                />
 
-        <Route
-          path="/admin-dashboard"
-          element={<AdminDashboard />}
-        />
+                <Route
+                    path="/dashboard"
+                    element={<Dashboard />}
+                />
 
-        <Route
-          path="/leaderboard/:id"
-          element={<Leaderboard />}
-        />
+                <Route
+                    path="/admin-dashboard"
+                    element={<AdminDashboard />}
+                />
 
-      </Route>
+                <Route
+                    path="/leaderboard/:id"
+                    element={<Leaderboard />}
+                />
 
-      <Route path="/login" element={<Login />} />
+            </Route>
 
-      <Route path="/signup" element={<Signup />} />
+            <Route
+                path="/login"
+                element={<Login />}
+            />
 
-      <Route path="/profile" element={<Profile />} />
+            <Route
+                path="/signup"
+                element={<Signup />}
+            />
 
-    </Routes>
+            <Route
+                path="/profile"
+                element={<Profile />}
+            />
 
-  );
+            <Route
+                path="/profile/edit"
+                element={<EditProfile />}
+            />
+
+            <Route
+                path="/change-password"
+                element={<ChangePassword />}
+            />
+
+        </Routes>
+
+    );
 
 }
 

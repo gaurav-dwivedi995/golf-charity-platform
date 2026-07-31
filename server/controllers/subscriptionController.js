@@ -1,7 +1,18 @@
-const { buySubscription } = require("../models/subscriptionModel");
-const { updateMembership } = require("../models/userModel");
+const {
+    buySubscription,
+    getAllSubscriptions
+} = require("../models/subscriptionModel");
 
+const {
+    updateMembership
+} = require("../models/userModel");
+
+// Purchase Subscription
 const purchaseSubscription = (req, res) => {
+
+    console.log("USER :", req.user);
+
+    console.log("BODY :", req.body);
 
     const user_id = req.user.id;
 
@@ -12,54 +23,68 @@ const purchaseSubscription = (req, res) => {
         end_date
     } = req.body;
 
-    if (
-        !plan_name ||
-        !amount ||
-        !start_date ||
-        !end_date
-    ) {
-        return res.status(400).json({
-            message: "All fields are required"
-        });
-    }
-
     buySubscription(
+
         user_id,
+
         plan_name,
+
         amount,
+
         start_date,
+
         end_date,
-        (err, result) => {
+
+        (err) => {
 
             if (err) {
+
+                console.log("SQL ERROR :", err);
+
                 return res.status(500).json({
                     message: "Subscription Failed"
                 });
+
             }
 
             updateMembership(
                 user_id,
                 "Premium",
-                (err2) => {
-
-                    if (err2) {
-                        return res.status(500).json({
-                            message: "Membership Update Failed"
-                        });
-                    }
-
-                    return res.status(201).json({
-                        message: "Subscription Purchased Successfully"
-                    });
-
-                }
+                () => {}
             );
 
+            res.status(201).json({
+                message: "Subscription Purchased Successfully"
+            });
+
         }
+
     );
 
 };
 
+// Admin
+const allSubscriptions = (req, res) => {
+
+    getAllSubscriptions((err, result) => {
+
+        if (err) {
+
+            console.log("SQL ERROR :", err);
+
+            return res.status(500).json({
+                message: "Database Error"
+            });
+
+        }
+
+        res.json(result);
+
+    });
+
+};
+
 module.exports = {
-    purchaseSubscription
+    purchaseSubscription,
+    allSubscriptions
 };

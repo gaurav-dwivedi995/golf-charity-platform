@@ -6,23 +6,15 @@ const verifyToken = require("../middleware/authMiddleware");
 const verifyAdmin = require("../middleware/adminMiddleware");
 
 const {
-    purchaseSubscription,
-    allSubscriptions
-} = require("../controllers/subscriptionController");
+    report
+} = require("../controllers/reportController");
 
-// User
-router.post(
-    "/buy",
-    verifyToken,
-    purchaseSubscription
-);
-
-// Admin
+// Admin Reports
 router.get(
-    "/all",
+    "/",
     verifyToken,
     verifyAdmin,
-    allSubscriptions
+    report
 );
 
 module.exports = router;

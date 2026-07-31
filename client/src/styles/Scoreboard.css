@@ -1,37 +1,19 @@
-.scoreboard{
-    padding:80px 60px;
-    text-align: center;
-    background:#fff;
-}
+.scoreboard-table{
 
-.scoreboard h2{
-    color:#2b7a3d;
-    margin-bottom:40px;
-    font-size:40px;
-}
-
-.scoreboard table{
     width:100%;
-    border-collapse:collapse;
-    box-shadow: 0 5px 15px rgba(0,0,0,.1);
+    overflow-x:auto;
+
 }
 
+.scoreboard-table table{
+
+    min-width:700px;
+
+}
+
+.scoreboard td,
 .scoreboard th{
-    background:#2b7a3d;
-    color:white;
-    padding:15px;
-    font-size:18px;
-}
 
-.scoreboard td{
-    padding:15px;
-    border-bottom:1px solid #ddd;
-}
+    white-space:nowrap;
 
-.scoreboard tr:nth-child(even){
-    background:#f7f7f7;
-}
-
-.scoreboard tr:hover{
-    background:#eaf7ed;
 }

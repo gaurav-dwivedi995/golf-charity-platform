@@ -1,41 +1,59 @@
 const db = require("../config/db");
 
-// =========================
-// Create User
-// =========================
-const createUser = (full_name, email, password, phone, callback) => {
+const createUser = (
+    full_name,
+    email,
+    password,
+    phone,
+    callback
+) => {
 
     const sql = `
         INSERT INTO users
-        (full_name,email,password,phone)
+        (
+            full_name,
+            email,
+            password,
+            phone
+        )
         VALUES
         (?,?,?,?)
     `;
 
     db.query(
         sql,
-        [full_name, email, password, phone],
+        [
+            full_name,
+            email,
+            password,
+            phone
+        ],
         callback
     );
 
 };
 
-// =========================
-// Find User By Email
-// =========================
-const findUserByEmail = (email, callback) => {
+const findUserByEmail = (
+    email,
+    callback
+) => {
 
-    const sql =
-        "SELECT * FROM users WHERE email = ?";
+    db.query(
 
-    db.query(sql, [email], callback);
+        "SELECT * FROM users WHERE email = ?",
+
+        [email],
+
+        callback
+
+    );
 
 };
 
-// =========================
-// Find User By ID
-// =========================
-const findUserById = (id, callback) => {
+const findUserById = (
+    id,
+    callback
+) => {
 
     const sql = `
         SELECT
@@ -45,41 +63,114 @@ const findUserById = (id, callback) => {
             phone,
             membership,
             role,
-            created_at
+            created_at,
+            password
         FROM users
         WHERE id = ?
     `;
 
-    db.query(sql, [id], callback);
+    db.query(
+        sql,
+        [id],
+        callback
+    );
 
 };
 
-// =========================
-// Update Membership
-// =========================
 const updateMembership = (
     user_id,
     membership,
     callback
 ) => {
 
+    db.query(
+
+        `
+        UPDATE users
+        SET membership=?
+        WHERE id=?
+        `,
+
+        [
+            membership,
+            user_id
+        ],
+
+        callback
+
+    );
+
+};
+
+const updateProfile = (
+    id,
+    full_name,
+    email,
+    phone,
+    callback
+) => {
+
     const sql = `
         UPDATE users
-        SET membership = ?
+        SET
+            full_name=?,
+            email=?,
+            phone=?
+        WHERE id=?
+    `;
+
+    db.query(
+
+        sql,
+
+        [
+            full_name,
+            email,
+            phone,
+            id
+        ],
+
+        callback
+
+    );
+
+};
+
+const updatePassword = (
+    id,
+    password,
+    callback
+) => {
+
+    const sql = `
+        UPDATE users
+        SET password = ?
         WHERE id = ?
     `;
 
     db.query(
         sql,
-        [membership, user_id],
+        [
+            password,
+            id
+        ],
         callback
     );
 
 };
 
 module.exports = {
+
     createUser,
+
     findUserByEmail,
+
     findUserById,
-    updateMembership
+
+    updateMembership,
+
+    updateProfile,
+
+    updatePassword
+
 };

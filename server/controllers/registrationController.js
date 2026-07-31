@@ -5,40 +5,27 @@ const {
     cancelRegistration
 } = require("../models/registrationModel");
 
-// Register Tournament
+// Register
 const register = (req, res) => {
 
     const user_id = req.user.id;
-
     const { tournament_id } = req.body;
-
-    if (!tournament_id) {
-
-        return res.status(400).json({
-            message: "Tournament ID Required"
-        });
-
-    }
 
     checkRegistration(
         user_id,
         tournament_id,
-        (err, rows) => {
+        (err, result) => {
 
             if (err) {
-
                 return res.status(500).json({
                     message: "Database Error"
                 });
-
             }
 
-            if (rows.length > 0) {
-
+            if (result.length > 0) {
                 return res.status(400).json({
-                    message: "You are already registered for this tournament"
+                    message: "Already Registered"
                 });
-
             }
 
             registerTournament(
@@ -47,14 +34,12 @@ const register = (req, res) => {
                 (err) => {
 
                     if (err) {
-
                         return res.status(500).json({
                             message: "Registration Failed"
                         });
-
                     }
 
-                    return res.status(201).json({
+                    res.status(201).json({
                         message: "Tournament Registered Successfully"
                     });
 
@@ -66,45 +51,39 @@ const register = (req, res) => {
 
 };
 
-// Get My Registrations
+// My Registrations
 const myRegistrations = (req, res) => {
 
     const user_id = req.user.id;
 
     getMyRegistrations(
         user_id,
-        (err, rows) => {
+        (err, result) => {
 
             if (err) {
-
                 return res.status(500).json({
-                    message: "Failed"
+                    message: "Database Error"
                 });
-
             }
 
-            res.json(rows);
+            res.json(result);
 
         }
     );
 
 };
 
-// Cancel Registration
+// Cancel
 const cancel = (req, res) => {
 
-    const { id } = req.params;
-
     cancelRegistration(
-        id,
+        req.params.id,
         (err) => {
 
             if (err) {
-
                 return res.status(500).json({
                     message: "Cancel Failed"
                 });
-
             }
 
             res.json({
