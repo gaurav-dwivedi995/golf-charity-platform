@@ -1,10 +1,9 @@
 const {
 
     findUserById,
-
     updateProfile
 
-} = require("../models/userModel");
+} = require("../models/UserModel");
 
 const getProfile = (req, res) => {
 
@@ -34,7 +33,7 @@ const getProfile = (req, res) => {
 
             }
 
-            res.json(result[0]);
+            return res.json(result[0]);
 
         }
 
@@ -47,9 +46,7 @@ const editProfile = (req, res) => {
     const {
 
         full_name,
-
         email,
-
         phone
 
     } = req.body;
@@ -57,11 +54,8 @@ const editProfile = (req, res) => {
     updateProfile(
 
         req.user.id,
-
         full_name,
-
         email,
-
         phone,
 
         (err) => {
@@ -76,7 +70,7 @@ const editProfile = (req, res) => {
 
             }
 
-            res.json({
+            return res.json({
 
                 message: "Profile Updated"
 
@@ -91,7 +85,6 @@ const editProfile = (req, res) => {
 module.exports = {
 
     getProfile,
-
     editProfile
 
 };

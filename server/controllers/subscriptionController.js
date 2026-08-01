@@ -5,14 +5,10 @@ const {
 
 const {
     updateMembership
-} = require("../models/userModel");
+} = require("../models/UserModel");
 
 // Purchase Subscription
 const purchaseSubscription = (req, res) => {
-
-    console.log("USER :", req.user);
-
-    console.log("BODY :", req.body);
 
     const user_id = req.user.id;
 
@@ -26,20 +22,16 @@ const purchaseSubscription = (req, res) => {
     buySubscription(
 
         user_id,
-
         plan_name,
-
         amount,
-
         start_date,
-
         end_date,
 
         (err) => {
 
             if (err) {
 
-                console.log("SQL ERROR :", err);
+                console.log(err);
 
                 return res.status(500).json({
                     message: "Subscription Failed"
@@ -48,13 +40,18 @@ const purchaseSubscription = (req, res) => {
             }
 
             updateMembership(
+
                 user_id,
                 "Premium",
+
                 () => {}
+
             );
 
-            res.status(201).json({
+            return res.status(201).json({
+
                 message: "Subscription Purchased Successfully"
+
             });
 
         }
@@ -70,21 +67,23 @@ const allSubscriptions = (req, res) => {
 
         if (err) {
 
-            console.log("SQL ERROR :", err);
-
             return res.status(500).json({
+
                 message: "Database Error"
+
             });
 
         }
 
-        res.json(result);
+        return res.json(result);
 
     });
 
 };
 
 module.exports = {
+
     purchaseSubscription,
     allSubscriptions
+
 };
