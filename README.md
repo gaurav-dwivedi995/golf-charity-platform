@@ -220,7 +220,7 @@ MySQL Database
 
 ### Home Page
 
-> Add Screenshot
+![Home](screenshots/home.png)
 
 ### Login Page
 
