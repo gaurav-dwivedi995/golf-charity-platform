@@ -248,12 +248,6 @@ MySQL Database
 
 ---
 
-### 👤 User Dashboard
-
-![User Dashboard](screenshots/dashboard.png)
-
----
-
 ## Future Improvements
 
 - Payment Gateway Integration
