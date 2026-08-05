@@ -250,7 +250,7 @@ MySQL Database
 
 ### 👤 User Dashboard
 
-![User Dashboard](screenshots/user-dashboard.png)
+![User Dashboard](screenshots/dashboard.png)
 
 ---
 
