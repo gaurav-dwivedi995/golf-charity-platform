@@ -218,33 +218,39 @@ MySQL Database
 
 ## Screenshots
 
-### Home Page
+### 🏠 Home Page
 
-![Home](screenshots/home.png)
+![Home Page](screenshots/home.png)
 
-### Login Page
+---
 
-> Add Screenshot
+### 🔐 Login Page
 
-### Signup Page
+![Login Page](screenshots/login.png)
 
-> Add Screenshot
+---
 
-### Tournament Page
+### 📝 Signup Page
 
-> Add Screenshot
+![Signup Page](screenshots/signup.png)
 
-### Charity Page
+---
 
-> Add Screenshot
+### ⛳ Tournament Page
 
-### User Dashboard
+![Tournament Page](screenshots/tournament.png)
 
-> Add Screenshot
+---
 
-### Admin Dashboard
+### ❤️ Charity Page
 
-> Add Screenshot
+![Charity Page](screenshots/charity.png)
+
+---
+
+### 👤 User Dashboard
+
+![User Dashboard](screenshots/user-dashboard.png)
 
 ---
 
